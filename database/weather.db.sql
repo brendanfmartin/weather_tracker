@@ -1,7 +1,8 @@
+CREATE database weather;
+
 CREATE SEQUENCE weather_forecast_seq start 1;
 CREATE SEQUENCE weather_actual_seq start 1;
 CREATE SEQUENCE locations_seq start 1;
-
 
 
 CREATE table weather_forecast (

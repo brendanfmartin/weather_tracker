@@ -15,46 +15,6 @@ $currentWeather = json_decode(file_get_contents($currentUrl), true);
 // $historyWeather = json_decode(file_get_contents($historyUrl));
 
 
-// // coordinates
-// var_dump($currentWeather["coord"]["lon"];
-// var_dump($currentWeather["coord"]["lat"];
-
-// // sys
-// var_dump($currentWeather["sys"]["type"];
-// var_dump($currentWeather["sys"]["id"];
-// var_dump($currentWeather["sys"]["message"];
-// var_dump($currentWeather["sys"]["country"];
-// var_dump($currentWeather["sys"]["sunrise"];
-// var_dump($currentWeather["sys"]["sunset"];
-
-// // weather
-// var_dump($currentWeather["weather"][0]["id"];
-// var_dump($currentWeather["weather"][0]["main"];
-// var_dump($currentWeather["weather"][0]["description"];
-// var_dump($currentWeather["weather"][0]["icon"];
-
-// // base
-// var_dump($currentWeather["base"];
-
-// // main
-// var_dump($currentWeather["main"]["temp"];
-// var_dump($currentWeather["main"]["pressure"];
-// var_dump($currentWeather["main"]["temp_min"];
-// var_dump($currentWeather["main"]["temp_max"];
-// var_dump($currentWeather["main"]["humidity"];
-
-// // wind
-// var_dump($currentWeather["wind"]["speed"];
-// var_dump($currentWeather["wind"]["deg"];
-
-// //other
-// var_dump($currentWeather["clouds"]["all"];
-// var_dump($currentWeather["dt"];
-// var_dump($currentWeather["id"];
-// var_dump($currentWeather["name"];
-// var_dump($currentWeather["cod"];
-
-
 // coordinates
 echo $currentWeather["coord"]["lon"].'<br>';
 echo $currentWeather["coord"]["lat"].'<br>';
