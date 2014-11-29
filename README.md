@@ -26,3 +26,12 @@ vendor/bin/phpcs path/to/file/___.php
 
 # JavaScript
 Currently using external JSLint site.
+
+Testing
+================
+# PHP
+```
+vendor/bin/phpunit --bootstrap autoload.php tests/____Test
+```
+
+#JavaScript
