@@ -9,26 +9,26 @@ namespace Models;
  * @package  Models
  * @author   John Landis <jalandis@gmail.com>
  * @license  http://opensource.org/licenses/gpl-license.php GNU Public License
- * @link     https://github.com/brendanfmartin/weather_tracker/blob/master/library/WeatherReport.php
+ * @link     https://github.com/brendanfmartin/weather_tracker/blob/master/library/Models/WeatherReport.php
  */
 class WeatherReport
 {
 
-    protected $location;
+    public $location;
 
-    protected $forecastDate;
+    public $forecastDate;
 
-    protected $creationDate;
+    public $creationDate;
 
-    protected $forecastedHigh;
+    public $forecastedHigh;
 
-    protected $forecastedLow;
+    public $forecastedLow;
 
-    protected $precipitation;
+    public $precipitation;
 
-    protected $createdAt;
+    public $createdAt;
 
-    protected $updatedAt;
+    public $updatedAt;
 
 
     /**
@@ -59,7 +59,7 @@ class WeatherReport
      *
      * @return self
      */
-    protected function setLocation(Location $location)
+    public function setLocation(Location $location)
     {
         $this->location = $location;
 
@@ -87,7 +87,7 @@ class WeatherReport
      *
      * @return self
      */
-    protected function setForecastDate($forecastDate)
+    public function setForecastDate($forecastDate)
     {
         $this->forecastDate = $forecastDate;
 
@@ -115,7 +115,7 @@ class WeatherReport
      *
      * @return self
      */
-    protected function setCreationDate($creationDate)
+    public function setCreationDate($creationDate)
     {
         $this->creationDate = $creationDate;
 
@@ -143,7 +143,7 @@ class WeatherReport
      *
      * @return self
      */
-    protected function setForecastedHigh($forecastedHigh)
+    public function setForecastedHigh($forecastedHigh)
     {
         $this->forecastedHigh = $forecastedHigh;
 
@@ -171,7 +171,7 @@ class WeatherReport
      *
      * @return self
      */
-    protected function setForecastedLow($forecastedLow)
+    public function setForecastedLow($forecastedLow)
     {
         $this->forecastedLow = $forecastedLow;
 
@@ -199,7 +199,7 @@ class WeatherReport
      *
      * @return self
      */
-    protected function setPrecipitation($precipitation)
+    public function setPrecipitation($precipitation)
     {
         $this->precipitation = $precipitation;
 
@@ -227,7 +227,7 @@ class WeatherReport
      *
      * @return self
      */
-    protected function setCreatedAt($createdAt)
+    public function setCreatedAt($createdAt)
     {
         $this->createdAt = $createdAt;
 
@@ -255,7 +255,7 @@ class WeatherReport
      *
      * @return self
      */
-    protected function setUpdatedAt($updatedAt)
+    public function setUpdatedAt($updatedAt)
     {
         $this->updatedAt = $updatedAt;
 

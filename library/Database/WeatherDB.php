@@ -11,7 +11,7 @@ use Symfony\Component\Yaml\Yaml;
  * @package  Database
  * @author   John Landis <jalandis@gmail.com>
  * @license  http://opensource.org/licenses/gpl-license.php GNU Public License
- * @link     https://github.com/brendanfmartin/weather_tracker/blob/master/library/WeatherDB.php
+ * @link     https://github.com/brendanfmartin/weather_tracker/blob/master/library/Database/WeatherDB.php
  */
 class WeatherDB
 {

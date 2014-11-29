@@ -9,18 +9,18 @@ namespace Models;
  * @package  Models
  * @author   John Landis <jalandis@gmail.com>
  * @license  http://opensource.org/licenses/gpl-license.php GNU Public License
- * @link     https://github.com/brendanfmartin/weather_tracker/blob/master/library/Location.php
+ * @link     https://github.com/brendanfmartin/weather_tracker/blob/master/library/Models/Location.php
  */
 class Location
 {
 
-    protected $locationName;
+    public $locationName;
 
-    protected $locationDescription;
+    public $locationDescription;
 
-    protected $longitude;
+    public $longitude;
 
-    protected $latitude;
+    public $latitude;
 
 
     /**
@@ -51,7 +51,7 @@ class Location
      *
      * @return self
      */
-    protected function setLocationName($locationName)
+    public function setLocationName($locationName)
     {
         $this->locationName = $locationName;
 
@@ -79,7 +79,7 @@ class Location
      *
      * @return self
      */
-    protected function setLocationDescription($locationDescription)
+    public function setLocationDescription($locationDescription)
     {
         $this->locationDescription = $locationDescription;
 
@@ -107,7 +107,7 @@ class Location
      *
      * @return self
      */
-    protected function setLongitude($longitude)
+    public function setLongitude($longitude)
     {
         $this->longitude = $longitude;
 
@@ -135,7 +135,7 @@ class Location
      *
      * @return self
      */
-    protected function setLatitude($latitude)
+    public function setLatitude($latitude)
     {
         $this->latitude = $latitude;
 
