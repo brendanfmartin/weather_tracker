@@ -3,6 +3,13 @@ weather_tracker
 
 Track the accuracy of weather forecasts
 
+Setup
+===============
+```
+sudo apt-get install  postgresql postgresql-contrib
+psql -f database/weather.db.sql
+```
+
 Dev Setup
 ===============
 ```
@@ -15,4 +22,7 @@ php composer.phar install
 Coding Standards
 ================
 # PHP Lint
-../vendor/bin/phpcs path/to/file/___.php
+vendor/bin/phpcs path/to/file/___.php
+
+# JavaScript
+Currently using external JSLint site.
