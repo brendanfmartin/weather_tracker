@@ -14,7 +14,7 @@ class WeatherDBTests extends PHPUnit_Framework_TestCase
     public function testParseConfig()
     {
         $dbConnection = new WeatherDB();
-        $dbParams = $dbConnection->parseConfig(__DIR__ . '/testConfig.ini');
+        $dbParams = $dbConnection->parseConfig(__DIR__ . '/testData/testConfig.ini');
 
         $this->assertEquals('host1', $dbParams['postgres']['host']);
         $this->assertEquals('port2', $dbParams['postgres']['port']);
@@ -30,7 +30,7 @@ class WeatherDBTests extends PHPUnit_Framework_TestCase
     public function testGetHost()
     {
         $dbConnection = new WeatherDB();
-        $dbParams = $dbConnection->parseConfig(__DIR__ . '/testConfig.ini');
+        $dbParams = $dbConnection->parseConfig(__DIR__ . '/testData/testConfig.ini');
         $this->assertEquals('host1', $dbConnection->getHost($dbParams));
     }
 
@@ -41,7 +41,7 @@ class WeatherDBTests extends PHPUnit_Framework_TestCase
     public function testGetPort()
     {
         $dbConnection = new WeatherDB();
-        $dbParams = $dbConnection->parseConfig(__DIR__ . '/testConfig.ini');
+        $dbParams = $dbConnection->parseConfig(__DIR__ . '/testData/testConfig.ini');
         $this->assertEquals('port2', $dbConnection->getPort($dbParams));
     }
 
@@ -52,7 +52,7 @@ class WeatherDBTests extends PHPUnit_Framework_TestCase
     public function testGetDbName()
     {
         $dbConnection = new WeatherDB();
-        $dbParams = $dbConnection->parseConfig(__DIR__ . '/testConfig.ini');
+        $dbParams = $dbConnection->parseConfig(__DIR__ . '/testData/testConfig.ini');
         $this->assertEquals('dbName3', $dbConnection->getDbName($dbParams));
     }
 
@@ -63,7 +63,7 @@ class WeatherDBTests extends PHPUnit_Framework_TestCase
     public function testGetUser()
     {
         $dbConnection = new WeatherDB();
-        $dbParams = $dbConnection->parseConfig(__DIR__ . '/testConfig.ini');
+        $dbParams = $dbConnection->parseConfig(__DIR__ . '/testData/testConfig.ini');
         $this->assertEquals('user4', $dbConnection->getUser($dbParams));
     }
 
@@ -74,7 +74,7 @@ class WeatherDBTests extends PHPUnit_Framework_TestCase
     public function testGetPassword()
     {
         $dbConnection = new WeatherDB();
-        $dbParams = $dbConnection->parseConfig(__DIR__ . '/testConfig.ini');
+        $dbParams = $dbConnection->parseConfig(__DIR__ . '/testData/testConfig.ini');
         $this->assertEquals('password5', $dbConnection->getPassword($dbParams));
     }
 
@@ -84,7 +84,7 @@ class WeatherDBTests extends PHPUnit_Framework_TestCase
     public function testBuildConnectionString()
     {
         $dbConnection = new WeatherDB();
-        $dbParams = $dbConnection->parseConfig(__DIR__ . '/testConfig.ini');
+        $dbParams = $dbConnection->parseConfig(__DIR__ . '/testData/testConfig.ini');
         $connectionString = $dbConnection->buildConnectionString(
             $dbConnection->getHost($dbParams),
             $dbConnection->getPort($dbParams),
