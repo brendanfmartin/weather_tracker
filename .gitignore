@@ -1,0 +1,3 @@
+config/composer.phar
+config/composer.lock
+vendor/*

@@ -1,0 +1,11 @@
+{
+  "name": "brendanfmartin/weather_tracker",
+  "description": "Track the accuracy of weather forecasts",
+  "config": {
+    "bin-dir"   : "../vendor/bin",
+     "vendor-dir": "../vendor"
+  },
+  "require-dev": {
+    "squizlabs/php_codesniffer": "1.*"
+  }
+}
