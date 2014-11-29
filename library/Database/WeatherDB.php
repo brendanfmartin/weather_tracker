@@ -85,6 +85,27 @@ class WeatherDB
 
 
     /**
+     * Execute a query against the current database connection.
+     *
+     * @param String $query  Database query
+     * @param Array  $params Parameters for the database query
+     *
+     * @throws Exception DBConnection must be established
+     *
+     * @return resource Postrgres query result resource or null
+     */
+    public function query($query, $params)
+    {
+        if ($this->dbConnection === null) {
+            throw new Exception('Database connection not established');
+        }
+
+        return pg_query_params($this->dbConnection, $query, $params);
+
+    }//end query()
+
+
+    /**
      * Gets the value of host.
      *
      * @param Array $dbParams Database connection parameters
