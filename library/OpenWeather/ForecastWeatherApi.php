@@ -17,6 +17,7 @@ class ForecastWeatherApi
 
     const WEATHER_FORECAST_DAILY_API_URL = 'http://api.openweathermap.org/data/2.5/forecast/daily';
 
+
     /**
      *  Hidden constructor.
      */
@@ -101,18 +102,19 @@ class ForecastWeatherApi
      * Preforms network request for daily forecast by city name.
      *
      * @param String $cityName City name with optional country (ex. London,uk)
-     * @param String $days      Number of days requested (1 to 16)
+     * @param String $days     Number of days requested (1 to 16)
      * @param String $units    [internal, metric, imperial] measurment units default's to imperial
      * @param String $language language code deafult's to en
      * @param String $mode     [xml, json] format of results default's to json
      *
+     * @throws \InvalidArgumentException $day argument must be 1-16
      * @link http://openweathermap.org/forecast
      * @return String json result of network call
      */
     public static function getDailyForecastByName($cityName, $days, $units='imperial', $language='en', $mode='json')
     {
         if ($days > 16 || $days < 1) {
-          throw new \InvalidArgumentException('Days requested must be between 1-16');
+            throw new \InvalidArgumentException('Days requested must be between 1-16');
         }
 
         $requestUrl  = self::WEATHER_FORECAST_DAILY_API_URL;
@@ -127,18 +129,19 @@ class ForecastWeatherApi
      * Preforms network request for daily forecast by city id.
      *
      * @param String $cityId   City id
-     * @param String $days      Number of days requested (1 to 16)
+     * @param String $days     Number of days requested (1 to 16)
      * @param String $units    [internal, metric, imperial] measurment units default's to imperial
      * @param String $language language code deafult's to en
      * @param String $mode     [xml, json] format of results default's to json
      *
+     * @throws \InvalidArgumentException $day argument must be 1-16
      * @link http://openweathermap.org/forecast
      * @return String json result of network call
      */
     public static function getDailyForecastById($cityId, $days, $units='imperial', $language='en', $mode='json')
     {
         if ($days > 16 || $days < 1) {
-          throw new \InvalidArgumentException('Days requested must be between 1-16');
+            throw new \InvalidArgumentException('Days requested must be between 1-16');
         }
 
         $requestUrl  = self::WEATHER_FORECAST_DAILY_API_URL;
@@ -159,6 +162,7 @@ class ForecastWeatherApi
      * @param String $language  language code deafult's to en
      * @param String $mode      [xml, json] format of results default's to json
      *
+     * @throws \InvalidArgumentException $day argument must be 1-16
      * @link http://openweathermap.org/forecast
      * @return String json result of network call
      */
@@ -171,7 +175,7 @@ class ForecastWeatherApi
         $mode='json'
     ) {
         if ($days > 16 || $days < 1) {
-          throw new \InvalidArgumentException('Days requested must be between 1-16');
+            throw new \InvalidArgumentException('Days requested must be between 1-16');
         }
 
         $requestUrl  = self::WEATHER_FORECAST_DAILY_API_URL;

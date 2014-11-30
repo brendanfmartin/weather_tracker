@@ -90,7 +90,7 @@ class WeatherDB
      * @param String $query  Database query
      * @param Array  $params Parameters for the database query
      *
-     * @throws Exception DBConnection must be established
+     * @throws \Exception DBConnection must be established
      *
      * @return resource Postrgres query result resource or null
      */
