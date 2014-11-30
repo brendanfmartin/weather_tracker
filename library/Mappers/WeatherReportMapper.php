@@ -18,9 +18,9 @@ class WeatherReportMapper
 
 
     /**
-     *  Constructor.
+     *  Hidden constructor.
      */
-    public function __construct()
+    private function __construct()
     {
 
     }//end __construct()
@@ -106,6 +106,20 @@ class WeatherReportMapper
         return $weatherReport;
 
     }//end mapCurrentJsonToPhp()
+
+
+    /**
+     * Persist current PHP WeatherReport object to database.
+     *
+     * @param WeatherReport $report Object to persist
+     *
+     * @return Boolean Success indicator
+     */
+    public static function persistCurrentReport(WeatherReport $report)
+    {
+        return false;
+
+    }//end persistCurrentReport()
 
 
     /**

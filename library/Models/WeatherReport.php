@@ -585,7 +585,6 @@ class WeatherReport
     }//end setSnowPrecipitationVolume()
 
 
-
 }//end class
 
 ?>
