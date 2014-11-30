@@ -38,6 +38,9 @@ class WeatherReportMapper
         $obj = self::parseJson($json);
 
         $weatherReport = new WeatherReport();
+
+        $weatherReport->setIsForecast(false);
+
         if (isset($obj->dt) === true) {
             $weatherReport->setDate($obj->dt);
         }
@@ -106,6 +109,95 @@ class WeatherReportMapper
         return $weatherReport;
 
     }//end mapCurrentJsonToPhp()
+
+
+    /**
+     * Map forecast json data to PHP WeatherReport objects.
+     *
+     * @param String $json Unparsed json data
+     *
+     * @return Array Parsed Array of WeatherReport objects
+     */
+    public static function mapForecastJsonToPhp($json)
+    {
+        $obj = self::parseJson($json);
+
+        $weatherReports = array();
+        foreach ($obj->list as $report) {
+            $weatherReport = new WeatherReport();
+
+            $weatherReport->setIsForecast(true);
+
+            if (isset($report->dt) === true) {
+                $weatherReport->setDate($report->dt);
+            }
+
+            if (isset($report->sys->sunrise) === true) {
+                $weatherReport->setSunrise($report->sys->sunrise);
+            }
+
+            if (isset($report->sys->sunset) === true) {
+                $weatherReport->setSunset($report->sys->sunset);
+            }
+
+            if (isset($report->main->temp) === true) {
+                $weatherReport->setTemperature($report->main->temp);
+            }
+
+            if (isset($report->main->temp_min) === true) {
+                $weatherReport->setMinTemperature($report->main->temp_min);
+            }
+
+            if (isset($report->main->temp_max) === true) {
+                $weatherReport->setMaxTemperature($report->main->temp_max);
+            }
+
+            if (isset($report->main->humidity) === true) {
+                $weatherReport->setHumidity($report->main->humidity);
+            }
+
+            if (isset($report->main->pressure) === true) {
+                $weatherReport->setPressure($report->main->pressure);
+            }
+
+            if (isset($report->main->sea_level) === true) {
+                $weatherReport->setSeaLevelPressure($report->main->sea_level);
+            }
+
+            if (isset($report->main->grnd_level) === true) {
+                $weatherReport->setGroundLevelPressure($report->main->grnd_level);
+            }
+
+            if (isset($report->wind->speed) === true) {
+                $weatherReport->setWindSpeed($report->wind->speed);
+            }
+
+            if (isset($report->wind->deg) === true) {
+                $weatherReport->setWindDirection($report->wind->deg);
+            }
+
+            if (isset($report->wind->gust) === true) {
+                $weatherReport->setWindGusts($report->wind->gust);
+            }
+
+            if (isset($report->clouds->all) === true) {
+                $weatherReport->setCloudiness($report->clouds->all);
+            }
+
+            $field = '3h';
+            if (isset($report->rain->$field) === true) {
+                $weatherReport->setRainPrecipitationVolume($report->rain->$field);
+            }
+
+            if (isset($report->snow->$field) === true) {
+                $weatherReport->setSnowPrecipitationVolume($report->snow->$field);
+            }
+
+            array_push($weatherReports, $weatherReport);
+        }
+        return $weatherReports;
+
+    }//end mapForecastJsonToPhp()
 
 
     /**

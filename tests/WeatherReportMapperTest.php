@@ -13,8 +13,9 @@ class WeatherReportMapperTests extends PHPUnit_Framework_TestCase
      */
     public function testMapCurrentJsonToPhp()
     {
-        $report = WeatherReportMapper::mapCurrentJsonToPhp(file_get_contents(__DIR__ . '/testData/testData.json'));
+        $report = WeatherReportMapper::mapCurrentJsonToPhp(file_get_contents(__DIR__ . '/testData/testCurrentData.json'));
 
+        $this->assertEquals(false, $report->getIsForecast(), 'Found incorrect weather report type');
         $this->assertEquals(1417284900, $report->getDate(), 'Found incorrect Unix date');
         $this->assertEquals(1417262608, $report->getSunrise(), 'Found incorrect Unix sunrise date');
         $this->assertEquals(1417297102, $report->getSunset(), 'Found incorrect Unix sunset date');
@@ -31,7 +32,43 @@ class WeatherReportMapperTests extends PHPUnit_Framework_TestCase
         $this->assertEquals(75, $report->getCloudiness(), 'Found incorrect cloudiness');
         $this->assertEquals(10, $report->getRainPrecipitationVolume(), 'Found incorrect rain precipitation');
         $this->assertEquals(8, $report->getSnowPrecipitationVolume(), 'Found incorrect snow precipitation');
+    }
 
+    /**
+     *  Test mapForecastJsonToPhp method of WeatherReportMapper class.
+     */
+    public function testMapForecastJsonToPhp()
+    {
+        $reports = WeatherReportMapper::mapForecastJsonToPhp(file_get_contents(__DIR__ . '/testData/test5DayForecastData.json'));
+
+        $firstReport = $reports[0];
+        $this->assertEquals(true, $firstReport->getIsForecast(), 'Found incorrect weather report type');
+        $this->assertEquals(1417381200, $firstReport->getDate(), 'Found incorrect Unix date');
+        $this->assertEquals(282.23, $firstReport->getTemperature(), 'Found incorrect temperature');
+        $this->assertEquals(282.23, $firstReport->getMinTemperature(), 'Found incorrect min temperature');
+        $this->assertEquals(284.006, $firstReport->getMaxTemperature(), 'Found incorrect max temperature');
+        $this->assertEquals(64, $firstReport->getHumidity(), 'Found incorrect humidity');
+        $this->assertEquals(1017.32, $firstReport->getPressure(), 'Found incorrect pressure');
+        $this->assertEquals(1032.66, $firstReport->getSeaLevelPressure(), 'Found incorrect seal level pressure');
+        $this->assertEquals(1017.32, $firstReport->getGroundLevelPressure(), 'Found incorrect ground level pressure');
+        $this->assertEquals(2.31, $firstReport->getWindSpeed(), 'Found incorrect wind speed');
+        $this->assertEquals(197.501, $firstReport->getWindDirection(), 'Found incorrect wind direction');
+        $this->assertEquals(12, $firstReport->getCloudiness(), 'Found incorrect cloudiness');
+
+        $lastReport = end($reports);
+        $this->assertEquals(true, $lastReport->getIsForecast(), 'Found incorrect weather report type');
+        $this->assertEquals(1417737600, $lastReport->getDate(), 'Found incorrect Unix date');
+        $this->assertEquals(273.582, $lastReport->getTemperature(), 'Found incorrect temperature');
+        $this->assertEquals(273.582, $lastReport->getMinTemperature(), 'Found incorrect min temperature');
+        $this->assertEquals(273.582, $lastReport->getMaxTemperature(), 'Found incorrect max temperature');
+        $this->assertEquals(78, $lastReport->getHumidity(), 'Found incorrect humidity');
+        $this->assertEquals(1026.91, $lastReport->getPressure(), 'Found incorrect pressure');
+        $this->assertEquals(1042.89, $lastReport->getSeaLevelPressure(), 'Found incorrect seal level pressure');
+        $this->assertEquals(1026.91, $lastReport->getGroundLevelPressure(), 'Found incorrect ground level pressure');
+        $this->assertEquals(1.16, $lastReport->getWindSpeed(), 'Found incorrect wind speed');
+        $this->assertEquals(284.001, $lastReport->getWindDirection(), 'Found incorrect wind direction');
+        $this->assertEquals(8, $lastReport->getCloudiness(), 'Found incorrect cloudiness');
+        $this->assertEquals(0, $lastReport->getRainPrecipitationVolume(), 'Found incorrect rain precipitation');
     }
 }
 

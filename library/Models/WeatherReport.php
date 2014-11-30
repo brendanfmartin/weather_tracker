@@ -15,6 +15,11 @@ class WeatherReport
 {
 
     /**
+     * Flag indicating measured data or forecast.
+     */
+    public $isForecast;
+
+    /**
      * Date receiving time, unix time, GMT.
      */
     public $date;
@@ -107,6 +112,34 @@ class WeatherReport
     {
 
     }//end __construct()
+
+
+    /**
+     * Gets the Flag indicating measured data or forecast.
+     *
+     * @return boolean
+     */
+    public function getIsForecast()
+    {
+        return $this->isForecast;
+
+    }//end getIsForecast()
+
+
+    /**
+     * Sets the Flag indicating measured data or forecast.
+     *
+     * @param boolean $isForecast Indicating forecast or determined data.
+     *
+     * @return self
+     */
+    public function setIsForecast($isForecast)
+    {
+        $this->isForecast = $isForecast;
+
+        return $this;
+
+    }//end setIsForecast()
 
 
     /**
