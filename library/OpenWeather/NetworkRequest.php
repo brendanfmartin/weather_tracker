@@ -3,7 +3,7 @@
 namespace OpenWeather;
 
 /**
- * Weather Report Mapper.
+ * Network request utility class.
  *
  * @category Library
  * @package  OpenWeather
@@ -13,6 +13,15 @@ namespace OpenWeather;
  */
 class NetworkRequest
 {
+
+
+    /**
+     *  Hidden constructor.
+     */
+    private function __construct()
+    {
+
+    }//end __construct()
 
 
     /**
