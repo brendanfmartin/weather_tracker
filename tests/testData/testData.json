@@ -23,16 +23,25 @@
   "main": {
     "temp": 32.4,
     "pressure": 1025,
+    "sea_level":1018.18,
+    "grnd_level":1005.93,
     "temp_min": 30.2,
     "temp_max": 35.6,
     "humidity": 84
   },
   "wind": {
     "speed": 5.62,
-    "deg": 120
+    "deg": 120,
+    "gust": 10
   },
   "clouds": {
     "all": 75
+  },
+  "rain": {
+    "3h": 10
+  },
+  "snow": {
+    "3h": 8
   },
   "dt": 1417284900,
   "id": 4562144,

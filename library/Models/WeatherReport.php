@@ -14,21 +14,90 @@ namespace Models;
 class WeatherReport
 {
 
+    /**
+     * Date receiving time, unix time, GMT.
+     */
+    public $date;
+
+    /**
+     * Location class.
+     */
     public $location;
 
-    public $forecastDate;
+    /**
+     * Sunrise time, unix, UTC.
+     */
+    public $sunrise;
 
-    public $creationDate;
+    /**
+     * Sunset time, unix, UTC.
+     */
+    public $sunset;
 
-    public $forecastedHigh;
+    /**
+     * Temperature, Kelvin.
+     */
+    public $temperature;
 
-    public $forecastedLow;
+    /**
+     * This is deviation from current temp that is possible for large cities.
+     */
+    public $minTemperature;
 
-    public $precipitation;
+    /**
+     * This is deviation from current temp that is possible for large cities.
+     */
+    public $maxTemperature;
 
-    public $createdAt;
+    /**
+     * Percentage.
+     */
+    public $humidity;
 
-    public $updatedAt;
+    /**
+     * Atmospheric pressure (on the sea level, if there is no sea_level or grnd_level data), hPa.
+     */
+    public $pressure;
+
+    /**
+     * Atmospheric pressure on the sea level, hPa.
+     */
+    public $seaLevelPressure;
+
+    /**
+     * Atmospheric pressure on the ground level, hPa.
+     */
+    public $groundLevelPressure;
+
+    /**
+     * Wind speed, mps.
+     */
+    public $windSpeed;
+
+    /**
+     * Wind direction, degrees (meteorological)
+     */
+    public $windDirection;
+
+    /**
+     * Wind gust, mps.
+     */
+    public $windGusts;
+
+    /**
+     * Percentage.
+     */
+    public $cloudiness;
+
+    /**
+     * Precipitation volume for last 3 hours, mm.
+     */
+    public $rainPrecipitationVolume;
+
+    /**
+     * Snow precipitation volume for last 3 hours, mm.
+     */
+    public $snowPrecipitationVolume;
 
 
     /**
@@ -41,9 +110,37 @@ class WeatherReport
 
 
     /**
-     * Gets the value of location.
+     * Gets the Date receiving time, unix time, GMT.
      *
-     * @return mixed
+     * @return String
+     */
+    public function getDate()
+    {
+        return $this->date;
+
+    }//end getDate()
+
+
+    /**
+     * Sets the Date receiving time, unix time, GMT.
+     *
+     * @param String $date the recieve date
+     *
+     * @return self
+     */
+    public function setDate($date)
+    {
+        $this->date = $date;
+
+        return $this;
+
+    }//end setDate()
+
+
+    /**
+     * Gets the Location class.
+     *
+     * @return Location
      */
     public function getLocation()
     {
@@ -53,13 +150,13 @@ class WeatherReport
 
 
     /**
-     * Sets the value of location.
+     * Sets the Location.
      *
-     * @param mixed $location the location
+     * @param Location $location the location
      *
      * @return self
      */
-    public function setLocation(Location $location)
+    public function setLocation($location)
     {
         $this->location = $location;
 
@@ -69,199 +166,424 @@ class WeatherReport
 
 
     /**
-     * Gets the value of forecastDate.
+     * Gets the Sunrise time, unix, UTC.
      *
-     * @return mixed
+     * @return String
      */
-    public function getForecastDate()
+    public function getSunrise()
     {
-        return $this->forecastDate;
+        return $this->sunrise;
 
-    }//end getForecastDate()
+    }//end getSunrise()
 
 
     /**
-     * Sets the value of forecastDate.
+     * Sets the Sunrise time, unix, UTC.
      *
-     * @param mixed $forecastDate the forecast date
+     * @param String $sunrise the sunrise
      *
      * @return self
      */
-    public function setForecastDate($forecastDate)
+    public function setSunrise($sunrise)
     {
-        $this->forecastDate = $forecastDate;
+        $this->sunrise = $sunrise;
 
         return $this;
 
-    }//end setForecastDate()
+    }//end setSunrise()
 
 
     /**
-     * Gets the value of creationDate.
+     * Gets the Sunset time, unix, UTC.
      *
-     * @return mixed
+     * @return String
      */
-    public function getCreationDate()
+    public function getSunset()
     {
-        return $this->creationDate;
+        return $this->sunset;
 
-    }//end getCreationDate()
+    }//end getSunset()
 
 
     /**
-     * Sets the value of creationDate.
+     * Sets the Sunset time, unix, UTC.
      *
-     * @param mixed $creationDate the creation date
+     * @param String $sunset the sunset
      *
      * @return self
      */
-    public function setCreationDate($creationDate)
+    public function setSunset($sunset)
     {
-        $this->creationDate = $creationDate;
+        $this->sunset = $sunset;
 
         return $this;
 
-    }//end setCreationDate()
+    }//end setSunset()
 
 
     /**
-     * Gets the value of forecastedHigh.
+     * Gets the Temperature, Kelvin.
      *
-     * @return mixed
+     * @return String
      */
-    public function getForecastedHigh()
+    public function getTemperature()
     {
-        return $this->forecastedHigh;
+        return $this->temperature;
 
-    }//end getForecastedHigh()
+    }//end getTemperature()
 
 
     /**
-     * Sets the value of forecastedHigh.
+     * Sets the Temperature, Kelvin.
      *
-     * @param mixed $forecastedHigh the forecasted high
+     * @param String $temperature the temperature
      *
      * @return self
      */
-    public function setForecastedHigh($forecastedHigh)
+    public function setTemperature($temperature)
     {
-        $this->forecastedHigh = $forecastedHigh;
+        $this->temperature = $temperature;
 
         return $this;
 
-    }//end setForecastedHigh()
+    }//end setTemperature()
 
 
     /**
-     * Gets the value of forecastedLow.
+     * Gets the min temperature in Kelvins.
      *
-     * @return mixed
+     * @return String
      */
-    public function getForecastedLow()
+    public function getMinTemperature()
     {
-        return $this->forecastedLow;
+        return $this->minTemperature;
 
-    }//end getForecastedLow()
+    }//end getMinTemperature()
 
 
     /**
-     * Sets the value of forecastedLow.
+     * Sets the the min temperature in Kelvins.
      *
-     * @param mixed $forecastedLow the forecasted low
+     * @param String $minTemperature the min temperature
      *
      * @return self
      */
-    public function setForecastedLow($forecastedLow)
+    public function setMinTemperature($minTemperature)
     {
-        $this->forecastedLow = $forecastedLow;
+        $this->minTemperature = $minTemperature;
 
         return $this;
 
-    }//end setForecastedLow()
+    }//end setMinTemperature()
 
 
     /**
-     * Gets the value of precipitation.
+     * Gets the max temperature in Kelvins.
      *
-     * @return mixed
+     * @return String
      */
-    public function getPrecipitation()
+    public function getMaxTemperature()
     {
-        return $this->precipitation;
+        return $this->maxTemperature;
 
-    }//end getPrecipitation()
+    }//end getMaxTemperature()
 
 
     /**
-     * Sets the value of precipitation.
+     * Sets the max temperature in Kelvins.
      *
-     * @param mixed $precipitation the precipitation
+     * @param String $maxTemperature the max temperature
      *
      * @return self
      */
-    public function setPrecipitation($precipitation)
+    public function setMaxTemperature($maxTemperature)
     {
-        $this->precipitation = $precipitation;
+        $this->maxTemperature = $maxTemperature;
 
         return $this;
 
-    }//end setPrecipitation()
+    }//end setMaxTemperature()
 
 
     /**
-     * Gets the value of createdAt.
+     * Gets the humidity percentage.
      *
-     * @return mixed
+     * @return String
      */
-    public function getCreatedAt()
+    public function getHumidity()
     {
-        return $this->createdAt;
+        return $this->humidity;
 
-    }//end getCreatedAt()
+    }//end getHumidity()
 
 
     /**
-     * Sets the value of createdAt.
+     * Sets the humidity percentage.
      *
-     * @param mixed $createdAt the created at
+     * @param String $humidity the humidity
      *
      * @return self
      */
-    public function setCreatedAt($createdAt)
+    public function setHumidity($humidity)
     {
-        $this->createdAt = $createdAt;
+        $this->humidity = $humidity;
 
         return $this;
 
-    }//end setCreatedAt()
+    }//end setHumidity()
 
 
     /**
-     * Gets the value of updatedAt.
+     * Gets the Atmospheric pressure (on the sea level, if there is no sea_level or grnd_level data), hPa.
      *
-     * @return mixed
+     * @return String
      */
-    public function getUpdatedAt()
+    public function getPressure()
     {
-        return $this->updatedAt;
+        return $this->pressure;
 
-    }//end getUpdatedAt()
+    }//end getPressure()
 
 
     /**
-     * Sets the value of updatedAt.
+     * Sets the Atmospheric pressure (on the sea level, if there is no sea_level or grnd_level data), hPa.
      *
-     * @param mixed $updatedAt the updated at
+     * @param String $pressure the pressure
      *
      * @return self
      */
-    public function setUpdatedAt($updatedAt)
+    public function setPressure($pressure)
     {
-        $this->updatedAt = $updatedAt;
+        $this->pressure = $pressure;
 
         return $this;
 
-    }//end setUpdatedAt()
+    }//end setPressure()
+
+
+    /**
+     * Gets the Atmospheric pressure on the sea level, hPa.
+     *
+     * @return String
+     */
+    public function getSeaLevelPressure()
+    {
+        return $this->seaLevelPressure;
+
+    }//end getSeaLevelPressure()
+
+
+    /**
+     * Sets the Atmospheric pressure on the sea level, hPa.
+     *
+     * @param String $seaLevelPressure the sea level pressure
+     *
+     * @return self
+     */
+    public function setSeaLevelPressure($seaLevelPressure)
+    {
+        $this->seaLevelPressure = $seaLevelPressure;
+
+        return $this;
+
+    }//end setSeaLevelPressure()
+
+
+    /**
+     * Gets the Atmospheric pressure on the ground level, hPa.
+     *
+     * @return String
+     */
+    public function getGroundLevelPressure()
+    {
+        return $this->groundLevelPressure;
+
+    }//end getGroundLevelPressure()
+
+
+    /**
+     * Sets the Atmospheric pressure on the ground level, hPa.
+     *
+     * @param String $groundLevelPressure the ground level pressure
+     *
+     * @return self
+     */
+    public function setGroundLevelPressure($groundLevelPressure)
+    {
+        $this->groundLevelPressure = $groundLevelPressure;
+
+        return $this;
+
+    }//end setGroundLevelPressure()
+
+
+    /**
+     * Gets the Wind speed, mps.
+     *
+     * @return String
+     */
+    public function getWindSpeed()
+    {
+        return $this->windSpeed;
+
+    }//end getWindSpeed()
+
+
+    /**
+     * Sets the Wind speed, mps.
+     *
+     * @param String $windSpeed the wind speed
+     *
+     * @return self
+     */
+    public function setWindSpeed($windSpeed)
+    {
+        $this->windSpeed = $windSpeed;
+
+        return $this;
+
+    }//end setWindSpeed()
+
+
+    /**
+     * Gets the Wind direction, degrees (meteorological).
+     *
+     * @return String
+     */
+    public function getWindDirection()
+    {
+        return $this->windDirection;
+
+    }//end getWindDirection()
+
+
+    /**
+     * Sets the Wind direction, degrees (meteorological).
+     *
+     * @param String $windDirection the wind direction
+     *
+     * @return self
+     */
+    public function setWindDirection($windDirection)
+    {
+        $this->windDirection = $windDirection;
+
+        return $this;
+
+    }//end setWindDirection()
+
+
+    /**
+     * Gets the Wind gust, mps.
+     *
+     * @return String
+     */
+    public function getWindGusts()
+    {
+        return $this->windGusts;
+
+    }//end getWindGusts()
+
+
+    /**
+     * Sets the Wind gust, mps.
+     *
+     * @param String $windGusts the wind gusts
+     *
+     * @return self
+     */
+    public function setWindGusts($windGusts)
+    {
+        $this->windGusts = $windGusts;
+
+        return $this;
+
+    }//end setWindGusts()
+
+
+    /**
+     * Gets the cloudiness percentage.
+     *
+     * @return String
+     */
+    public function getCloudiness()
+    {
+        return $this->cloudiness;
+
+    }//end getCloudiness()
+
+
+    /**
+     * Sets the cloudiness percentage.
+     *
+     * @param String $cloudiness the cloudiness
+     *
+     * @return self
+     */
+    public function setCloudiness($cloudiness)
+    {
+        $this->cloudiness = $cloudiness;
+
+        return $this;
+
+    }//end setCloudiness()
+
+
+    /**
+     * Gets the Precipitation volume for last 3 hours, mm.
+     *
+     * @return String
+     */
+    public function getRainPrecipitationVolume()
+    {
+        return $this->rainPrecipitationVolume;
+
+    }//end getRainPrecipitationVolume()
+
+
+    /**
+     * Sets the Precipitation volume for last 3 hours, mm.
+     *
+     * @param String $rainPrecipitationVolume the rain precipitation volume
+     *
+     * @return self
+     */
+    public function setRainPrecipitationVolume($rainPrecipitationVolume)
+    {
+        $this->rainPrecipitationVolume = $rainPrecipitationVolume;
+
+        return $this;
+
+    }//end setRainPrecipitationVolume()
+
+
+    /**
+     * Gets the Snow precipitation volume for last 3 hours, mm.
+     *
+     * @return String
+     */
+    public function getSnowPrecipitationVolume()
+    {
+        return $this->snowPrecipitationVolume;
+
+    }//end getSnowPrecipitationVolume()
+
+
+    /**
+     * Sets the Snow precipitation volume for last 3 hours, mm.
+     *
+     * @param String $snowPrecipitationVolume the snow precipitation volume
+     *
+     * @return self
+     */
+    public function setSnowPrecipitationVolume($snowPrecipitationVolume)
+    {
+        $this->snowPrecipitationVolume = $snowPrecipitationVolume;
+
+        return $this;
+
+    }//end setSnowPrecipitationVolume()
+
 
 
 }//end class
