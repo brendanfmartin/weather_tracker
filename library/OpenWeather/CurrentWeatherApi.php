@@ -17,9 +17,9 @@ class CurrentWeatherApi
 
 
     /**
-     *  Constructor.
+     *  Hidden constructor.
      */
-    public function __construct()
+    private function __construct()
     {
 
     }//end __construct()
@@ -31,7 +31,7 @@ class CurrentWeatherApi
      * @param String $cityName City name with optional country (ex. London,uk)
      * @param String $units    [internal, metric, imperial] measurment units default's to imperial
      * @param String $language language code deafult's to en
-     * @param String $mode     [xml, html, json] format of results deafault's to json
+     * @param String $mode     [xml, html, json] format of results default's to json
      *
      * @link http://openweathermap.org/current
      * @return String json result of network call
@@ -52,7 +52,7 @@ class CurrentWeatherApi
      * @param String $cityId   City id
      * @param String $units    [internal, metric, imperial] measurment units default's to imperial
      * @param String $language language code deafult's to en
-     * @param String $mode     [xml, html, json] format of results deafault's to json
+     * @param String $mode     [xml, html, json] format of results default's to json
      *
      * @link http://openweathermap.org/current
      * @return String json result of network call
@@ -72,10 +72,10 @@ class CurrentWeatherApi
      *
      * @param String $latitude  City latitude
      * @param String $longitude City longitude
-     * @param String $radius    City longitude
+     * @param String $radius    City radius
      * @param String $units     [internal, metric, imperial] measurment units default's to imperial
      * @param String $language  language code deafult's to en
-     * @param String $mode      [xml, html, json] format of results deafault's to json
+     * @param String $mode      [xml, html, json] format of results default's to json
      *
      * @link http://openweathermap.org/current
      * @return String json result of network call

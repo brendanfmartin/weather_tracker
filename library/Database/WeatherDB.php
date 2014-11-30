@@ -97,7 +97,7 @@ class WeatherDB
     public function query($query, $params)
     {
         if ($this->dbConnection === null) {
-            throw new Exception('Database connection not established');
+            throw new \Exception('Database connection not established');
         }
 
         return pg_query_params($this->dbConnection, $query, $params);
