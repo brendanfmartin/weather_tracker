@@ -11,7 +11,7 @@ use Models\WeatherReport;
  * @package  Mappers
  * @author   John Landis <jalandis@gmail.com>
  * @license  http://opensource.org/licenses/gpl-license.php GNU Public License
- * @link     https://github.com/brendanfmartin/weather_tracker/blob/master/library/Mappers/WeatherReport.php
+ * @link     https://github.com/brendanfmartin/weather_tracker/blob/master/library/Mappers/WeatherReportMapper.php
  */
 class WeatherReportMapper
 {
@@ -40,6 +40,9 @@ class WeatherReportMapper
         $weatherReport = self::mapGenericObject($obj);
         $weatherReport->setIsForecast(false);
 
+        $location = LocationMapper::mapGenericToLocation($obj);
+        $weatherReport->setLocation($location);
+
         return $weatherReport;
 
     }//end mapCurrentJsonToPhp()
@@ -55,11 +58,14 @@ class WeatherReportMapper
     public static function mapForecastJsonToPhp($json)
     {
         $obj = self::parseJson($json);
+        $location = LocationMapper::mapGenericToLocation($obj->city);
 
         $weatherReports = array();
         foreach ($obj->list as $report) {
             $weatherReport = self::mapGenericObject($report);
             $weatherReport->setIsForecast(true);
+
+            $weatherReport->setLocation($location);
 
             array_push($weatherReports, $weatherReport);
         }//end foreach

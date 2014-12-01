@@ -32,6 +32,12 @@ class WeatherReportMapperTests extends PHPUnit_Framework_TestCase
         $this->assertEquals(75, $report->getCloudiness(), 'Found incorrect cloudiness');
         $this->assertEquals(10, $report->getRainPrecipitationVolume(), 'Found incorrect rain precipitation');
         $this->assertEquals(8, $report->getSnowPrecipitationVolume(), 'Found incorrect snow precipitation');
+
+        $location = $report->getLocation();
+        $this->assertEquals(4562144, $location->getId(), 'Found incorrect location id');
+        $this->assertEquals('West Chester', $location->getLocationName(), 'Found incorrect location name');
+        $this->assertEquals(-75.6, $location->getLongitude(), 'Found incorrect longitude');
+        $this->assertEquals(39.96, $location->getLatitude(), 'Found incorrect latitude');
     }
 
     /**
@@ -54,6 +60,12 @@ class WeatherReportMapperTests extends PHPUnit_Framework_TestCase
         $this->assertEquals(2.31, $firstReport->getWindSpeed(), 'Found incorrect wind speed');
         $this->assertEquals(197.501, $firstReport->getWindDirection(), 'Found incorrect wind direction');
         $this->assertEquals(12, $firstReport->getCloudiness(), 'Found incorrect cloudiness');
+
+        $location = $firstReport->getLocation();
+        $this->assertEquals(4560349, $location->getId(), 'Found incorrect location id');
+        $this->assertEquals('Philadelphia', $location->getLocationName(), 'Found incorrect location name');
+        $this->assertEquals(-75.163788, $location->getLongitude(), 'Found incorrect longitude');
+        $this->assertEquals(39.952339, $location->getLatitude(), 'Found incorrect latitude');
 
         $lastReport = end($reports);
         $this->assertEquals(true, $lastReport->getIsForecast(), 'Found incorrect weather report type');

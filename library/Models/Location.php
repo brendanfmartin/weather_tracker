@@ -14,9 +14,9 @@ namespace Models;
 class Location
 {
 
-    public $locationName;
+    public $id;
 
-    public $locationDescription;
+    public $locationName;
 
     public $longitude;
 
@@ -30,6 +30,34 @@ class Location
     {
 
     }//end __construct()
+
+
+    /**
+     * Gets the value of id.
+     *
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+
+    }//end getId()
+
+
+    /**
+     * Sets the value of id.
+     *
+     * @param mixed $id the id
+     *
+     * @return self
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
+
+    }//end setId()
 
 
     /**
@@ -47,7 +75,7 @@ class Location
     /**
      * Sets the value of locationName.
      *
-     * @param mixed $locationName the location name
+     * @param $tring locationName the location Name
      *
      * @return self
      */
@@ -58,34 +86,6 @@ class Location
         return $this;
 
     }//end setLocationName()
-
-
-    /**
-     * Gets the value of locationDescription.
-     *
-     * @return mixed
-     */
-    public function getLocationDescription()
-    {
-        return $this->locationDescription;
-
-    }//end getLocationDescription()
-
-
-    /**
-     * Sets the value of locationDescription.
-     *
-     * @param mixed $locationDescription the location description
-     *
-     * @return self
-     */
-    public function setLocationDescription($locationDescription)
-    {
-        $this->locationDescription = $locationDescription;
-
-        return $this;
-
-    }//end setLocationDescription()
 
 
     /**
