@@ -75,7 +75,7 @@ class Location
     /**
      * Sets the value of locationName.
      *
-     * @param $tring locationName the location Name
+     * @param $tring $locationName the location Name
      *
      * @return self
      */

@@ -29,7 +29,7 @@ class LocationMapper
     /**
      * Map current json data to PHP Location object.
      *
-     * @param String $json Unparsed json data
+     * @param Object $object Generic json converted Php Object
      *
      * @return Location Parsed Location object
      */
@@ -54,7 +54,9 @@ class LocationMapper
 
         return $location;
 
-    }//end mapCurrentJsonToPhp()
-}
+    }//end mapGenericToLocation()
+
+
+}//end class
 
 ?>

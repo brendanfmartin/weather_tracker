@@ -37,7 +37,7 @@ class WeatherReportMapper
     {
         $obj = self::parseJson($json);
 
-        $weatherReport = self::mapGenericObject($obj);
+        $weatherReport = self::_mapGenericObject($obj);
         $weatherReport->setIsForecast(false);
 
         $location = LocationMapper::mapGenericToLocation($obj);
@@ -57,12 +57,12 @@ class WeatherReportMapper
      */
     public static function mapForecastJsonToPhp($json)
     {
-        $obj = self::parseJson($json);
+        $obj      = self::parseJson($json);
         $location = LocationMapper::mapGenericToLocation($obj->city);
 
         $weatherReports = array();
         foreach ($obj->list as $report) {
-            $weatherReport = self::mapGenericObject($report);
+            $weatherReport = self::_mapGenericObject($report);
             $weatherReport->setIsForecast(true);
 
             $weatherReport->setLocation($location);
@@ -74,6 +74,7 @@ class WeatherReportMapper
 
     }//end mapForecastJsonToPhp()
 
+
     /**
      * Private utility method for mapping json to PHP object.
      *
@@ -81,7 +82,7 @@ class WeatherReportMapper
      *
      * @return WeatherReport Parsed WeatherReport object
      */
-    private static function mapGenericObject($object)
+    private static function _mapGenericObject($object)
     {
         $weatherReport = new WeatherReport();
         if (isset($object->dt) === true) {
@@ -150,7 +151,8 @@ class WeatherReportMapper
         }
 
         return $weatherReport;
-    }//end mapGenericObject()
+
+    }//end _mapGenericObject()
 
 
     /**
