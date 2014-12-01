@@ -194,7 +194,8 @@ class WeatherReportMapper
             }
 
             array_push($weatherReports, $weatherReport);
-        }
+        }//end foreach
+
         return $weatherReports;
 
     }//end mapForecastJsonToPhp()
