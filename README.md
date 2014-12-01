@@ -22,7 +22,6 @@ psql -f database/weather.db.sql
 cd config
 php -r "readfile('https://getcomposer.org/installer');" | php
 php composer.phar install
-../vendor/bin/phpcs --config-set default_standard PHPCS
 ```
 
 Coding Standards
