@@ -37,74 +37,8 @@ class WeatherReportMapper
     {
         $obj = self::parseJson($json);
 
-        $weatherReport = new WeatherReport();
-
+        $weatherReport = self::mapGenericObject($obj);
         $weatherReport->setIsForecast(false);
-
-        if (isset($obj->dt) === true) {
-            $weatherReport->setDate($obj->dt);
-        }
-
-        if (isset($obj->sys->sunrise) === true) {
-            $weatherReport->setSunrise($obj->sys->sunrise);
-        }
-
-        if (isset($obj->sys->sunset) === true) {
-            $weatherReport->setSunset($obj->sys->sunset);
-        }
-
-        if (isset($obj->main->temp) === true) {
-            $weatherReport->setTemperature($obj->main->temp);
-        }
-
-        if (isset($obj->main->temp_min) === true) {
-            $weatherReport->setMinTemperature($obj->main->temp_min);
-        }
-
-        if (isset($obj->main->temp_max) === true) {
-            $weatherReport->setMaxTemperature($obj->main->temp_max);
-        }
-
-        if (isset($obj->main->humidity) === true) {
-            $weatherReport->setHumidity($obj->main->humidity);
-        }
-
-        if (isset($obj->main->pressure) === true) {
-            $weatherReport->setPressure($obj->main->pressure);
-        }
-
-        if (isset($obj->main->sea_level) === true) {
-            $weatherReport->setSeaLevelPressure($obj->main->sea_level);
-        }
-
-        if (isset($obj->main->grnd_level) === true) {
-            $weatherReport->setGroundLevelPressure($obj->main->grnd_level);
-        }
-
-        if (isset($obj->wind->speed) === true) {
-            $weatherReport->setWindSpeed($obj->wind->speed);
-        }
-
-        if (isset($obj->wind->deg) === true) {
-            $weatherReport->setWindDirection($obj->wind->deg);
-        }
-
-        if (isset($obj->wind->gust) === true) {
-            $weatherReport->setWindGusts($obj->wind->gust);
-        }
-
-        if (isset($obj->clouds->all) === true) {
-            $weatherReport->setCloudiness($obj->clouds->all);
-        }
-
-        $field = '3h';
-        if (isset($obj->rain->$field) === true) {
-            $weatherReport->setRainPrecipitationVolume($obj->rain->$field);
-        }
-
-        if (isset($obj->snow->$field) === true) {
-            $weatherReport->setSnowPrecipitationVolume($obj->snow->$field);
-        }
 
         return $weatherReport;
 
@@ -124,74 +58,8 @@ class WeatherReportMapper
 
         $weatherReports = array();
         foreach ($obj->list as $report) {
-            $weatherReport = new WeatherReport();
-
+            $weatherReport = self::mapGenericObject($report);
             $weatherReport->setIsForecast(true);
-
-            if (isset($report->dt) === true) {
-                $weatherReport->setDate($report->dt);
-            }
-
-            if (isset($report->sys->sunrise) === true) {
-                $weatherReport->setSunrise($report->sys->sunrise);
-            }
-
-            if (isset($report->sys->sunset) === true) {
-                $weatherReport->setSunset($report->sys->sunset);
-            }
-
-            if (isset($report->main->temp) === true) {
-                $weatherReport->setTemperature($report->main->temp);
-            }
-
-            if (isset($report->main->temp_min) === true) {
-                $weatherReport->setMinTemperature($report->main->temp_min);
-            }
-
-            if (isset($report->main->temp_max) === true) {
-                $weatherReport->setMaxTemperature($report->main->temp_max);
-            }
-
-            if (isset($report->main->humidity) === true) {
-                $weatherReport->setHumidity($report->main->humidity);
-            }
-
-            if (isset($report->main->pressure) === true) {
-                $weatherReport->setPressure($report->main->pressure);
-            }
-
-            if (isset($report->main->sea_level) === true) {
-                $weatherReport->setSeaLevelPressure($report->main->sea_level);
-            }
-
-            if (isset($report->main->grnd_level) === true) {
-                $weatherReport->setGroundLevelPressure($report->main->grnd_level);
-            }
-
-            if (isset($report->wind->speed) === true) {
-                $weatherReport->setWindSpeed($report->wind->speed);
-            }
-
-            if (isset($report->wind->deg) === true) {
-                $weatherReport->setWindDirection($report->wind->deg);
-            }
-
-            if (isset($report->wind->gust) === true) {
-                $weatherReport->setWindGusts($report->wind->gust);
-            }
-
-            if (isset($report->clouds->all) === true) {
-                $weatherReport->setCloudiness($report->clouds->all);
-            }
-
-            $field = '3h';
-            if (isset($report->rain->$field) === true) {
-                $weatherReport->setRainPrecipitationVolume($report->rain->$field);
-            }
-
-            if (isset($report->snow->$field) === true) {
-                $weatherReport->setSnowPrecipitationVolume($report->snow->$field);
-            }
 
             array_push($weatherReports, $weatherReport);
         }//end foreach
@@ -199,6 +67,84 @@ class WeatherReportMapper
         return $weatherReports;
 
     }//end mapForecastJsonToPhp()
+
+    /**
+     * Private utility method for mapping json to PHP object.
+     *
+     * @param Object $object generic object from json
+     *
+     * @return WeatherReport Parsed WeatherReport object
+     */
+    private static function mapGenericObject($object)
+    {
+        $weatherReport = new WeatherReport();
+        if (isset($object->dt) === true) {
+            $weatherReport->setDate($object->dt);
+        }
+
+        if (isset($object->sys->sunrise) === true) {
+            $weatherReport->setSunrise($object->sys->sunrise);
+        }
+
+        if (isset($object->sys->sunset) === true) {
+            $weatherReport->setSunset($object->sys->sunset);
+        }
+
+        if (isset($object->main->temp) === true) {
+            $weatherReport->setTemperature($object->main->temp);
+        }
+
+        if (isset($object->main->temp_min) === true) {
+            $weatherReport->setMinTemperature($object->main->temp_min);
+        }
+
+        if (isset($object->main->temp_max) === true) {
+            $weatherReport->setMaxTemperature($object->main->temp_max);
+        }
+
+        if (isset($object->main->humidity) === true) {
+            $weatherReport->setHumidity($object->main->humidity);
+        }
+
+        if (isset($object->main->pressure) === true) {
+            $weatherReport->setPressure($object->main->pressure);
+        }
+
+        if (isset($object->main->sea_level) === true) {
+            $weatherReport->setSeaLevelPressure($object->main->sea_level);
+        }
+
+        if (isset($object->main->grnd_level) === true) {
+            $weatherReport->setGroundLevelPressure($object->main->grnd_level);
+        }
+
+        if (isset($object->wind->speed) === true) {
+            $weatherReport->setWindSpeed($object->wind->speed);
+        }
+
+        if (isset($object->wind->deg) === true) {
+            $weatherReport->setWindDirection($object->wind->deg);
+        }
+
+        if (isset($object->wind->gust) === true) {
+            $weatherReport->setWindGusts($object->wind->gust);
+        }
+
+        if (isset($object->clouds->all) === true) {
+            $weatherReport->setCloudiness($object->clouds->all);
+        }
+
+        $field = '3h';
+        if (isset($object->rain->$field) === true) {
+            $weatherReport->setRainPrecipitationVolume($object->rain->$field);
+        }
+
+        if (isset($object->snow->$field) === true) {
+            $weatherReport->setSnowPrecipitationVolume($object->snow->$field);
+        }
+
+        return $weatherReport;
+    }//end mapGenericObject()
 
 
     /**
