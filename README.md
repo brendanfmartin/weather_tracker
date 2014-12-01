@@ -28,7 +28,7 @@ php composer.phar install
 Coding Standards
 ================
 ### PHP Lint
-vendor/bin/phpcs path/to/file/___.php
+vendor/bin/phpcs --standard=config/ruleset.xml path/to/file/___.php
 
 ### JavaScript
 Currently using external JSLint site.
