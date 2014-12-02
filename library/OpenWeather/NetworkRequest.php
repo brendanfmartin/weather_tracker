@@ -29,15 +29,23 @@ class NetworkRequest
      *
      * @param String $url Address for network request
      *
+     * @throws \Exception Curl exception
      * @return String json result of network call
      */
     public static function request($url)
     {
-        $curl = curl_init();
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($curl, CURLOPT_URL, $url);
-        $requestResults = curl_exec($curl);
-        curl_close($curl);
+        try {
+            $curl = curl_init();
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($curl, CURLOPT_URL, $url);
+            $requestResults = curl_exec($curl);
+
+            if (curl_errno($curl) !== 0) {
+                throw new \Exception(curl_error($curl));
+            }
+        } finally {
+            curl_close($curl);
+        }
 
         return $requestResults;
 
