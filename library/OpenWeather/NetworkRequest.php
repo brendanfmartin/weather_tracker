@@ -33,11 +33,18 @@ class NetworkRequest
      */
     public static function request($url)
     {
-        $curl = curl_init();
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($curl, CURLOPT_URL, $url);
-        $requestResults = curl_exec($curl);
-        curl_close($curl);
+        try {
+            $curl = curl_init();
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($curl, CURLOPT_URL, $url);
+            $requestResults = curl_exec($curl);
+
+            if(curl_errno($curl)){
+                throw new \Exception(curl_error($curl));
+            }
+        } finally {
+            curl_close($curl);
+        }
 
         return $requestResults;
 
