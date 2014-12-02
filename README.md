@@ -8,7 +8,7 @@ Setup
 
 ### Production Setup
 ```
-sudo apt-get install  postgresql postgresql-contrib
+sudo apt-get install postgresql postgresql-contrib
 psql -f database/weather.db.sql
 cd config
 php -r "readfile('https://getcomposer.org/installer');" | php
@@ -17,7 +17,7 @@ php composer.phar install --no-dev
 
 ### Dev Setup
 ```
-sudo apt-get install  postgresql postgresql-contrib
+sudo apt-get install postgresql postgresql-contrib
 psql -f database/weather.db.sql
 cd config
 php -r "readfile('https://getcomposer.org/installer');" | php
