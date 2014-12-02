@@ -1,7 +1,7 @@
 #!/bin/sh
 
 PROJECT=$(php -r "echo dirname(dirname(dirname(realpath('$0'))));")
-STAGED_FILES_CMD=$(git diff --cached --name-only --diff-filter=ACMR HEAD | grep \\\\.php)
+STAGED_FILES_CMD=$(git diff --cached --name-only --diff-filter=ACMR HEAD | grep '.php')
 
 # Determine if a file list is passed
 if [ "$#" -eq 1 ]
@@ -29,7 +29,7 @@ done
 if [ "$FILES" != "" ]
 then
   echo "Running PHP Code Sniffer..."
-  .vendor/bin/phpcs --standard=config/ruleset.xml --encoding=utf-8 -n -p "$FILES"
+  vendor/bin/phpcs --standard=config/ruleset.xml --encoding=utf-8 -n -p $FILES
   if [ $? != 0 ]
   then
     echo "Fix the error before commit."
@@ -37,7 +37,7 @@ then
   fi
 
   echo "Running PHP Unit Tests..."
-  .vendor/bin/phpunit --bootstrap autoload.php tests/
+  vendor/bin/phpunit --bootstrap autoload.php tests/
   if [ $? != 0 ]
   then
     echo "Fix the error before commit."
