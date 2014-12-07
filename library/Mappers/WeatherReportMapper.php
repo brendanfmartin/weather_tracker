@@ -257,7 +257,7 @@ class WeatherReportMapper
      */
     public static function getCurrentReport(Location $location, $date, $isForecast)
     {
-        $updateQuery = file_get_contents(__DIR__.'/queries/selectWeatherReport.sql');
+        $selectQuery = file_get_contents(__DIR__.'/queries/selectWeatherReport.sql');
         $db          = WeatherDB::getInstance();
 
         if (is_bool($isForecast) !== false) {
@@ -275,13 +275,20 @@ class WeatherReportMapper
                    'is_forecast' => $isForecast,
                   );
 
-        $queryResults = $db->query($updateQuery, $params);
+        $queryResults = $db->query($selectQuery, $params);
 
         if ($queryResults !== false) {
             $result = pg_affected_rows($queryResults) !== 0;
 
             if ($result === true) {
-                $result = self::_mapDbToPhp(pg_fetch_assoc($queryResults, 0));
+                $rowData = pg_fetch_assoc($queryResults, 0);
+                $result  = self::_mapDbToPhp($rowData);
+
+                $location = LocationMapper::getLocation($rowData['location_id']);
+
+                if ($location !== false) {
+                    $result->setLocation($location);
+                }
             }
         } else {
             $result = false;

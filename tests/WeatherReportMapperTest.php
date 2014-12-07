@@ -174,6 +174,12 @@ class WeatherReportMapperTests extends \PHPUnit_Framework_TestCase
         $this->assertEquals(10, $report->getRainPrecipitationVolume(), 'Found incorrect rain precipitation');
         $this->assertEquals(8, $report->getSnowPrecipitationVolume(), 'Found incorrect snow precipitation');
 
+        $location = $report->getLocation();
+        $this->assertEquals(4562144, $location->getId(), 'Found incorrect location id');
+        $this->assertEquals('West Chester', $location->getLocationName(), 'Found incorrect location name');
+        $this->assertEquals(-75.6, $location->getLongitude(), 'Found incorrect longitude');
+        $this->assertEquals(39.96, $location->getLatitude(), 'Found incorrect latitude');
+
     }//end testGetCurrentReport()
 
 
