@@ -59,6 +59,26 @@ class LocationMapper
 
 
     /**
+     * Private utility method for mapping Db result to PHP object.
+     *
+     * @param pg_query_params $result Return value for db query
+     *
+     * @return Location Parsed Location object
+     */
+    private static function _mapDbToPhp($result)
+    {
+        $location = new Location();
+        $location->setId($result['id']);
+        $location->setLocationName($result['name']);
+        $location->setLongitude($result['longitude']);
+        $location->setLatitude($result['latitude']);
+
+        return $location;
+
+    }//end _mapDbToPhp()
+
+
+    /**
      * Delete Location object to database.
      *
      * @param Location $location Object to delete
@@ -94,6 +114,37 @@ class LocationMapper
         return $result;
 
     }//end persistLocation()
+
+
+    /**
+     * Populates PHP Location object from database.
+     *
+     * @param int $id Location id
+     *
+     * @return Location object or Boolean false indicating failure
+     */
+    public static function getLocation($id)
+    {
+        $selectQuery = file_get_contents(__DIR__.'/queries/selectLocation.sql');
+        $db          = WeatherDB::getInstance();
+
+        $params = array('id' => $id);
+
+        $queryResults = $db->query($selectQuery, $params);
+
+        if ($queryResults !== false) {
+            $result = pg_affected_rows($queryResults) !== 0;
+
+            if ($result === true) {
+                $result = self::_mapDbToPhp(pg_fetch_assoc($queryResults, 0));
+            }
+        } else {
+            $result = false;
+        }
+
+        return $result;
+
+    }//end getLocation()
 
 
     /**
