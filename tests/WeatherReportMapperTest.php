@@ -82,6 +82,17 @@ class WeatherReportMapperTests extends PHPUnit_Framework_TestCase
         $this->assertEquals(8, $lastReport->getCloudiness(), 'Found incorrect cloudiness');
         $this->assertEquals(0, $lastReport->getRainPrecipitationVolume(), 'Found incorrect rain precipitation');
     }
+
+    /**
+     *  Test persistCurrentReport method of WeatherReportMapper class.
+     */
+    public function testpersistCurrentReport()
+    {
+        $report = WeatherReportMapper::mapCurrentJsonToPhp(file_get_contents(__DIR__ . '/testData/testCurrentData.json'));
+
+        WeatherReportMapper::deleteCurrentReport($report);
+        //$this->assertTrue(WeatherReportMapper::persistCurrentReport($report));
+    }
 }
 
 ?>
