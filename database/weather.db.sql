@@ -55,7 +55,7 @@ CREATE TABLE IF NOT EXISTS weather_reports (
   rain_precipitation_volume DOUBLE PRECISION NOT NULL,
   snow_precipitation_volume DOUBLE PRECISION NOT NULL,
   created_at BIGINT NOT NULL DEFAULT EXTRACT(EPOCH FROM CURRENT_TIMESTAMP),
-  CONSTRAINT report_uq UNIQUE(location_id, report_date)
+  CONSTRAINT report_uq UNIQUE(location_id, report_date, is_forecast)
 );
 
 COMMENT ON TABLE weather_reports IS 'Contains weather report records (Forecast and Actual).';
