@@ -18,14 +18,55 @@ class WeatherDB
 
     protected $dbConnection;
 
+    protected $dbConfigFile = '/../../config/configDev.yml';
+
 
     /**
-     *  Constructor.
+     * Returns the *Singleton* instance of this class.
+     *
+     * @return Singleton The *Singleton* instance.
      */
-    public function __construct()
+    public static function getInstance()
+    {
+        static $instance = null;
+        if (null === $instance) {
+            $instance = new static();
+        }
+
+        return $instance;
+
+    }//end getInstance()
+
+
+    /**
+     * Hidden constructor.
+     */
+    protected function __construct()
     {
 
     }//end __construct()
+
+
+    /**
+     * Hidden clone method.
+     *
+     * @return void
+     */
+    private function __clone()
+    {
+
+    }//end __clone()
+
+
+    /**
+     * Hidden unserialize method.
+     *
+     * @return void
+     */
+    private function __wakeup()
+    {
+
+    }//end __wakeup()
 
 
     /**
@@ -67,7 +108,7 @@ class WeatherDB
      *
      * @return WeatherDB $this
      */
-    public function connect($configFile)
+    private function _connect($configFile)
     {
         $dbParams = $this->parseConfig($configFile);
         $connectionString = $this->buildConnectionString(
@@ -78,10 +119,9 @@ class WeatherDB
             $this->getPassword($dbParams)
         );
 
-        $this->dbConnection = pg_connect($connectionString);
-        return $this;
+        return pg_connect($connectionString);
 
-    }//end connect()
+    }//end _connect()
 
 
     /**
@@ -90,19 +130,36 @@ class WeatherDB
      * @param String $query  Database query
      * @param Array  $params Parameters for the database query
      *
-     * @throws \Exception DBConnection must be established
-     *
      * @return resource Postrgres query result resource or null
      */
     public function query($query, $params)
     {
         if ($this->dbConnection === null) {
-            throw new \Exception('Database connection not established');
+            $this->dbConnection = $this->_connect(__DIR__.$this->dbConfigFile);
         }
 
         return pg_query_params($this->dbConnection, $query, $params);
 
     }//end query()
+
+
+    /**
+     * Execute a delete against the current database connection.
+     *
+     * @param String $table  Database table
+     * @param Array  $params Parameters identifying records
+     *
+     * @return mixed Number of rows affected or false for failure
+     */
+    public function delete($table, $params)
+    {
+        if ($this->dbConnection === null) {
+            $this->dbConnection = $this->_connect(__DIR__.$this->dbConfigFile);
+        }
+
+        return pg_delete($this->dbConnection, $table, $params);
+
+    }//end delete()
 
 
     /**

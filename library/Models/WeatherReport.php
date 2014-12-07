@@ -14,6 +14,8 @@ namespace Models;
 class WeatherReport
 {
 
+    public $id;
+
     /**
      * Flag indicating measured data or forecast.
      */
@@ -90,7 +92,7 @@ class WeatherReport
     public $windGusts;
 
     /**
-     * Percentage.
+     * Cloudiness measured in percentage.
      */
     public $cloudiness;
 
@@ -112,6 +114,34 @@ class WeatherReport
     {
 
     }//end __construct()
+
+
+    /**
+     * Gets the value of id.
+     *
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+
+    }//end getId()
+
+
+    /**
+     * Sets the value of id.
+     *
+     * @param mixed $id the id
+     *
+     * @return self
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
+
+    }//end setId()
 
 
     /**
