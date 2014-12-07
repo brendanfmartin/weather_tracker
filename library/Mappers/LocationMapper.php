@@ -3,6 +3,7 @@
 namespace Mappers;
 
 use Models\Location;
+use Database\WeatherDB;
 
 /**
  * Location Mapper.
@@ -55,6 +56,104 @@ class LocationMapper
         return $location;
 
     }//end mapGenericToLocation()
+
+
+    /**
+     * Delete Location object to database.
+     *
+     * @param Location $location Object to delete
+     *
+     * @return Boolean Success indicator
+     */
+    public static function deleteLocation(Location $location)
+    {
+        $locationId = $location->getId();
+        $params     = array('id' => $locationId);
+
+        $db = WeatherDB::getInstance();
+        return $db->delete('locations', $params);
+
+    }//end deleteLocation()
+
+
+    /**
+     * Persist Location object to database.
+     *
+     * @param Location $location Object to persist
+     *
+     * @return Boolean Success indicator
+     */
+    public static function persistLocation(Location $location)
+    {
+        $result = self::_updateLocation($location);
+
+        if ($result === false) {
+            $result = self::_insertLocation($location);
+        }
+
+        return $result;
+
+    }//end persistLocation()
+
+
+    /**
+     * Update Location object to database.
+     *
+     * @param Location $location Object to update
+     *
+     * @return Boolean Success indicator
+     */
+    private static function _updateLocation(Location $location)
+    {
+        $updateQuery = file_get_contents(__DIR__.'/queries/updateLocation.sql');
+
+        $params = array(
+                   $location->getId(),
+                   $location->getLocationName(),
+                   $location->getLongitude(),
+                   $location->getLatitude(),
+                  );
+
+        $db     = WeatherDB::getInstance();
+        $result = $db->query($updateQuery, $params);
+
+        if ($result !== false) {
+            $result = pg_affected_rows($result) !== 0;
+        }
+
+        return $result;
+
+    }//end _updateLocation()
+
+
+    /**
+     * Insert Location object to database.
+     *
+     * @param Location $location Object to insert
+     *
+     * @return Boolean Success indicator
+     */
+    private static function _insertLocation(Location $location)
+    {
+        $insertQuery = file_get_contents(__DIR__.'/queries/updateLocation.sql');
+
+        $params = array(
+                   $location->getId(),
+                   $location->getLocationName(),
+                   $location->getLongitude(),
+                   $location->getLatitude(),
+                  );
+
+        $db     = WeatherDB::getInstance();
+        $result = $db->query($insertQuery, $params);
+
+        if ($result !== false) {
+            $result = pg_affected_rows($result) !== 0;
+        }
+
+        return $result;
+
+    }//end _insertLocation()
 
 
 }//end class
