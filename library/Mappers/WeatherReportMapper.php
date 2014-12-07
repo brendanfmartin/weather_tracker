@@ -3,6 +3,7 @@
 namespace Mappers;
 
 use Models\WeatherReport;
+use Models\Location;
 use Database\WeatherDB;
 
 /**
@@ -157,6 +158,46 @@ class WeatherReportMapper
 
 
     /**
+     * Private utility method for mapping Db result to PHP object.
+     *
+     * @param pg_query_params $result Return value for db query
+     *
+     * @return WeatherReport Parsed WeatherReport object
+     */
+    private static function _mapDbToPhp($result)
+    {
+        $weatherReport = new WeatherReport();
+        $weatherReport->setId($result['id']);
+
+        $isForecast = false;
+        if ($result['is_forecast'] === 'true') {
+            $isForecast = true;
+        }
+
+        $weatherReport->setIsForecast($isForecast);
+        $weatherReport->setDate($result['report_date']);
+        $weatherReport->setSunrise($result['sunrise']);
+        $weatherReport->setSunset($result['sunset']);
+        $weatherReport->setTemperature($result['temperature']);
+        $weatherReport->setMinTemperature($result['mintemperature']);
+        $weatherReport->setMaxTemperature($result['maxtemperature']);
+        $weatherReport->setHumidity($result['humidity']);
+        $weatherReport->setPressure($result['pressure']);
+        $weatherReport->setSeaLevelPressure($result['sealevel_pressure']);
+        $weatherReport->setGroundLevelPressure($result['groundlevel_pressure']);
+        $weatherReport->setWindSpeed($result['wind_speed']);
+        $weatherReport->setWindDirection($result['wind_direction']);
+        $weatherReport->setWindGusts($result['wind_gusts']);
+        $weatherReport->setCloudiness($result['cloudiness']);
+        $weatherReport->setRainPrecipitationVolume($result['rain_precipitation_volume']);
+        $weatherReport->setSnowPrecipitationVolume($result['snow_precipitation_volume']);
+
+        return $weatherReport;
+
+    }//end _mapDbToPhp()
+
+
+    /**
      * Persist current PHP WeatherReport object to database.
      *
      * @param WeatherReport $weatherReport Object to persist
@@ -165,12 +206,14 @@ class WeatherReportMapper
      */
     public static function persistCurrentReport(WeatherReport $weatherReport)
     {
-        LocationMapper::persistLocation($weatherReport->getLocation());
+        $result = LocationMapper::persistLocation($weatherReport->getLocation());
 
-        if (empty($weatherReport->getId()) !== true) {
-            $result = self::_insertWeatherReport($weatherReport);
-        } else {
-            $result = self::_updateWeatherReport($weatherReport);
+        if ($result === true) {
+            if (empty($weatherReport->getId()) === true) {
+                $result = self::_insertWeatherReport($weatherReport);
+            } else {
+                $result = self::_updateWeatherReport($weatherReport);
+            }
         }
 
         return $result;
@@ -187,11 +230,66 @@ class WeatherReportMapper
      */
     public static function deleteCurrentReport(WeatherReport $weatherReport)
     {
-        $db     = WeatherDB::getInstance();
-        $params = array('id' => $weatherReport->getId());
+        $db = WeatherDB::getInstance();
+
+        if (empty($weatherReport->getId()) === false) {
+            $params = array('id' => $weatherReport->getId());
+        } else {
+            $params = array(
+                       'location_id' => $weatherReport->getLocation()->getId(),
+                       'report_date' => $weatherReport->getDate(),
+                      );
+        }
+
         return $db->delete('weather_reports', $params);
 
     }//end deleteCurrentReport()
+
+
+    /**
+     * Populates PHP WeatherReport object from database.
+     *
+     * @param Location $location   Location of desired report
+     * @param Date     $date       Date of desired repo
+     * @param Boolean  $isForecast Indicated forecast or actual data
+     *
+     * @return WeatherReport object or Boolean false indicating failure
+     */
+    public static function getCurrentReport(Location $location, $date, $isForecast)
+    {
+        $updateQuery = file_get_contents(__DIR__.'/queries/selectWeatherReport.sql');
+        $db          = WeatherDB::getInstance();
+
+        if (is_bool($isForecast) !== false) {
+            if ($isForecast === true) {
+                $isForecast = 'true';
+            } else {
+                $isForecast = 'false';
+            }
+        }
+
+        $params = array(
+                   'id'          => null,
+                   'location_id' => $location->getId(),
+                   'report_date' => $date,
+                   'is_forecast' => $isForecast,
+                  );
+
+        $queryResults = $db->query($updateQuery, $params);
+
+        if ($queryResults !== false) {
+            $result = pg_affected_rows($queryResults) !== 0;
+
+            if ($result === true) {
+                $result = self::_mapDbToPhp(pg_fetch_assoc($queryResults, 0));
+            }
+        } else {
+            $result = false;
+        }
+
+        return $result;
+
+    }//end getCurrentReport()
 
 
     /**
@@ -235,9 +333,7 @@ class WeatherReportMapper
         $db     = WeatherDB::getInstance();
         $result = $db->query($updateQuery, $params);
 
-        var_dump($result);
         if ($result !== false) {
-            var_dump(pg_affected_rows($result));
             $result = pg_affected_rows($result) !== 0;
         }
 
@@ -283,11 +379,22 @@ class WeatherReportMapper
                    $weatherReport->getSnowPrecipitationVolume(),
                   );
 
-        $db     = WeatherDB::getInstance();
-        $result = $db->query($insertQuery, $params);
+        $db           = WeatherDB::getInstance();
+        $queryResults = $db->query($insertQuery, $params);
 
-        if ($result !== false) {
-            $result = pg_affected_rows($result) !== 0;
+        if ($queryResults !== false) {
+            $result = pg_affected_rows($queryResults) !== 0;
+
+            if ($result === true) {
+                $insertedReport = self::getCurrentReport(
+                    $weatherReport->getLocation(),
+                    $weatherReport->getDate(),
+                    $isForecast
+                );
+                $weatherReport->setId($insertedReport->getId());
+            }
+        } else {
+            $result = false;
         }
 
         return $result;

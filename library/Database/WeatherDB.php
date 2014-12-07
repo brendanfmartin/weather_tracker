@@ -16,9 +16,9 @@ use Symfony\Component\Yaml\Yaml;
 class WeatherDB
 {
 
-    protected static $dbConnection;
+    protected $dbConnection;
 
-    protected static $dbConfigFile = '/../../config/configDev.yml';
+    protected $dbConfigFile = '/../../config/configDev.yml';
 
 
     /**
@@ -76,7 +76,7 @@ class WeatherDB
      *
      * @return Array Database connection parameters
      */
-    public static function parseConfig($configFile)
+    public function parseConfig($configFile)
     {
         return Yaml::parse(file_get_contents($configFile));
 
@@ -94,7 +94,7 @@ class WeatherDB
      *
      * @return Postgres connection string
      */
-    public static function buildConnectionString($host, $port, $dbName, $user, $password)
+    public function buildConnectionString($host, $port, $dbName, $user, $password)
     {
         return "host={$host} port={$port} dbname={$dbName} user={$user} password={$password}";
 
@@ -108,15 +108,15 @@ class WeatherDB
      *
      * @return WeatherDB $this
      */
-    private static function _connect($configFile)
+    private function _connect($configFile)
     {
-        $dbParams = self::parseConfig($configFile);
-        $connectionString = self::buildConnectionString(
-            self::getHost($dbParams),
-            self::getPort($dbParams),
-            self::getDbName($dbParams),
-            self::getUser($dbParams),
-            self::getPassword($dbParams)
+        $dbParams = $this->parseConfig($configFile);
+        $connectionString = $this->buildConnectionString(
+            $this->getHost($dbParams),
+            $this->getPort($dbParams),
+            $this->getDbName($dbParams),
+            $this->getUser($dbParams),
+            $this->getPassword($dbParams)
         );
 
         return pg_connect($connectionString);
@@ -134,11 +134,11 @@ class WeatherDB
      */
     public function query($query, $params)
     {
-        if (self::$dbConnection === null) {
-            self::$dbConnection = self::_connect(__DIR__.self::$dbConfigFile);
+        if ($this->dbConnection === null) {
+            $this->dbConnection = $this->_connect(__DIR__.$this->dbConfigFile);
         }
 
-        return pg_query_params(self::$dbConnection, $query, $params);
+        return pg_query_params($this->dbConnection, $query, $params);
 
     }//end query()
 
@@ -153,11 +153,11 @@ class WeatherDB
      */
     public function delete($table, $params)
     {
-        if (self::$dbConnection === null) {
-            self::$dbConnection = self::_connect(__DIR__.self::$dbConfigFile);
+        if ($this->dbConnection === null) {
+            $this->dbConnection = $this->_connect(__DIR__.$this->dbConfigFile);
         }
 
-        return pg_delete(self::$dbConnection, $table, $params);
+        return pg_delete($this->dbConnection, $table, $params);
 
     }//end delete()
 

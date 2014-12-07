@@ -135,7 +135,7 @@ class LocationMapper
      */
     private static function _insertLocation(Location $location)
     {
-        $insertQuery = file_get_contents(__DIR__.'/queries/updateLocation.sql');
+        $insertQuery = file_get_contents(__DIR__.'/queries/insertLocation.sql');
 
         $params = array(
                    $location->getId(),
