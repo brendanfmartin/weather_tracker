@@ -168,10 +168,8 @@ class WeatherReportMapper
         LocationMapper::persistLocation($weatherReport->getLocation());
 
         if (empty($weatherReport->getId()) !== true) {
-            echo 'Inserting' . PHP_EOL;
             $result = self::_insertWeatherReport($weatherReport);
         } else {
-            echo 'Updating' . PHP_EOL;
             $result = self::_updateWeatherReport($weatherReport);
         }
 
