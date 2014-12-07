@@ -39,6 +39,7 @@ php composer.phar install
 Coding Standards
 ================
 ### PHP Lint
+Currently will ignore any file in a folder named tests (case insensitive).
 ```
 vendor/bin/phpcs --standard=config/ruleset.xml path/to/file/___.php
 ```
