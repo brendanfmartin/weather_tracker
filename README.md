@@ -8,11 +8,6 @@ Setup
 
 ### config.yml Setup
 
-Create a postgres user and setup under weather_tracker_role.
-```
-
-```
-
 ### Ubuntu 14.04 Postgres Issues
 1. Uninstall
   - ```sudo apt-get purge postgresql postgresql-9.3 postgresql-common php5-pgsql```

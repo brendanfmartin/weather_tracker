@@ -2,5 +2,5 @@ postgres:
   host: localhost
   port: 5432
   dbName: weather_tracker
-  user: postgres
-  password: postgres
+  user: weather_tracker_user
+  password: weather_tracker_password
