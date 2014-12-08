@@ -6,6 +6,13 @@ Track the accuracy of weather forecasts
 Setup
 ===============
 
+### config.yml Setup
+
+Create a postgres user and setup under weather_tracker_role.
+```
+
+```
+
 ### Ubuntu 14.04 Postgres Issues
 1. Uninstall
   - ```sudo apt-get purge postgresql postgresql-9.3 postgresql-common php5-pgsql```
@@ -21,7 +28,9 @@ Setup
 ### Production Setup
 ```
 sudo apt-get install postgresql postgresql-contrib php5-pgsql
-sudo psql -U postgres weather_tracker -f database/weather.db.sql
+psql -U postgres -f database/weather_db_setup_0.sql
+sudo psql -U weather_tracker_user weather_tracker -f database/weather_db_setup_1.sql
+...
 cd config
 php -r "readfile('https://getcomposer.org/installer');" | php
 php composer.phar install --no-dev
@@ -30,7 +39,9 @@ php composer.phar install --no-dev
 ### Dev Setup
 ```
 sudo apt-get install postgresql postgresql-contrib php5-pgsql
-sudo psql -U postgres weather_tracker -f database/weather.db.sql
+psql -U postgres -f database/weather_db_setup_0.sql
+sudo psql -U weather_tracker_user weather_tracker -f database/weather_db_setup_1.sql
+...
 cd config
 php -r "readfile('https://getcomposer.org/installer');" | php
 php composer.phar install
