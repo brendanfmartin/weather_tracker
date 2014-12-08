@@ -1,24 +1,3 @@
-DO
-$body$
-BEGIN
-   IF NOT EXISTS (
-      SELECT *
-      FROM   pg_catalog.pg_user
-      WHERE  usename = 'postgres') THEN
-
-      CREATE ROLE postgres LOGIN PASSWORD 'postgres';
-   END IF;
-END
-$body$
-;
-
-DROP DATABASE weather_tracker;
-CREATE DATABASE weather_tracker;
-
-DROP TABLE IF EXISTS weather_reports;
-DROP TABLE IF EXISTS locations;
-
-DROP SEQUENCE IF EXISTS weather_report_seq;
 CREATE SEQUENCE weather_report_seq start 1;
 
 CREATE TABLE IF NOT EXISTS locations (
@@ -79,8 +58,3 @@ COMMENT ON COLUMN weather_reports.cloudiness IS 'Percentage cloudiness measured 
 COMMENT ON COLUMN weather_reports.rain_precipitation_volume IS 'Rain percentage over last 3 hours in mm.';
 COMMENT ON COLUMN weather_reports.snow_precipitation_volume IS 'Snow percentage over last 3 hours in mm.';
 COMMENT ON COLUMN weather_reports.created_at IS 'Date record created.';
-
-GRANT ALL PRIVILEGES ON SCHEMA public TO postgres;
-GRANT ALL PRIVILEGES ON DATABASE weather_tracker TO postgres;
-GRANT ALL PRIVILEGES ON TABLE weather_reports TO postgres;
-GRANT ALL PRIVILEGES ON TABLE locations TO postgres;
