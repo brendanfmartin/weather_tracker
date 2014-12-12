@@ -16,12 +16,12 @@ class WeatherTrackerRouter
     /**
      * Constructor.
      *
-     * @param $request Object holds all information about original http request.
+     * @param Request $request Object holds all information about original http request.
      */
     public function __construct(Request $request)
     {
 
-    }// end __construct()
+    }//end __construct()
 
 
 }//end class
