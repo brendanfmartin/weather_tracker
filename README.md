@@ -23,9 +23,7 @@ Setup
 ### Production Setup
 ```
 sudo apt-get install postgresql postgresql-contrib php5-pgsql
-psql -U postgres -f database/setup_0.sql
-sudo psql -U weather_tracker_user weather_tracker -f database/weather_db_setup_1.sql
-...
+.database/migrate.sh -u weather_tracker_user -p weather_tracker
 cd config
 php -r "readfile('https://getcomposer.org/installer');" | php
 php composer.phar install --no-dev
@@ -35,8 +33,7 @@ php composer.phar install --no-dev
 ```
 sudo apt-get install postgresql postgresql-contrib php5-pgsql
 psql -U postgres -f database/setup_0.sql
-sudo psql -U weather_tracker_user weather_tracker -f database/weather_db_setup_1.sql
-...
+.database/migrate.sh -u weather_tracker_user -p weather_tracker
 cd config
 php -r "readfile('https://getcomposer.org/installer');" | php
 php composer.phar install

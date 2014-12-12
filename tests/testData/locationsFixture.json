@@ -1,0 +1,42 @@
+[
+  {
+    "coord": {
+      "lon": -1.1,
+      "lat": 1.1
+    },
+    "id": 1,
+    "name": "City 1"
+  },
+  {
+    "coord": {
+      "lon": -2.2,
+      "lat": 2.2
+    },
+    "id": 2,
+    "name": "City 2"
+  },
+  {
+    "coord": {
+      "lon": -3.3,
+      "lat": 3.3
+    },
+    "id": 3,
+    "name": "City 3"
+  },
+  {
+    "coord": {
+      "lon": -4.4,
+      "lat": 4.4
+    },
+    "id": 4,
+    "name": "City 4"
+  },
+  {
+    "coord": {
+      "lon": -5.5,
+      "lat": 5.5
+    },
+    "id": 5,
+    "name": "City 5"
+  }
+]

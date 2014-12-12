@@ -12,6 +12,11 @@ spl_autoload_register(function ($class) {
     if (file_exists($libClass)) {
         include $libClass;
     }
+
+    $webserviceClass = __DIR__ . DIRECTORY_SEPARATOR . 'webservice' . DIRECTORY_SEPARATOR . $cleanClass . '.php';
+    if (file_exists($webserviceClass)) {
+        include $webserviceClass;
+    }
 });
 
 ?>

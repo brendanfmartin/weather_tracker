@@ -148,6 +148,30 @@ class LocationMapper
 
 
     /**
+     * Populates all PHP Location objects from database.
+     *
+     * @return Location object array
+     */
+    public static function getAllLocations()
+    {
+        $selectQuery = file_get_contents(__DIR__.'/queries/selectAllLocations.sql');
+        $db          = WeatherDB::getInstance();
+
+        $queryResults = $db->query($selectQuery, array());
+
+        $locations = array();
+        if ($queryResults !== false) {
+            while ($locationRow = pg_fetch_assoc($queryResults)) {
+                array_push($locations, self::_mapDbToPhp($locationRow));
+            }
+        }
+
+        return $locations;
+
+    }//end getAllLocations()
+
+
+    /**
      * Update Location object to database.
      *
      * @param Location $location Object to update
