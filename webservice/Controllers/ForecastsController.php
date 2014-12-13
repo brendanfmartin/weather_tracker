@@ -9,7 +9,9 @@ namespace Controllers;
  * @package  Controllers
  * @author   John Landis <jalandis@gmail.com>
  * @license  http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @codingStandardsIgnoreStart
  * @link     https://github.com/brendanfmartin/weather_tracker/blob/master/webservice/Controllers/ForecastsController.php
+ * @codingStandardsIgnoreEnd
  */
 class ForecastsController
 {

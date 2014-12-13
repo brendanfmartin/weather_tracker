@@ -11,7 +11,7 @@ namespace Models;
  * @license  http://opensource.org/licenses/gpl-license.php GNU Public License
  * @link     https://github.com/brendanfmartin/weather_tracker/blob/master/library/Models/Location.php
  */
-class Location
+class Location extends BaseModel
 {
 
     public $id;
@@ -24,10 +24,13 @@ class Location
 
 
     /**
-     *  Constructor.
+     * Constructor.
+     *
+     * @param mixed $parameters Array or object with parameters defining model.
      */
-    public function __construct()
+    public function __construct($parameters=null)
     {
+        parent::__construct($parameters);
 
     }//end __construct()
 
