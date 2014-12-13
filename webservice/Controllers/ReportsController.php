@@ -2,6 +2,8 @@
 
 namespace Controllers;
 
+use Mappers\WeatherReportDbMapper;
+
 /**
  * Weather Reports Controller.
  *
@@ -33,6 +35,14 @@ class ReportsController
      */
     public function getReports()
     {
+        $response  = new \Response();
+        $locations = WeatherReportDbMapper::getAllLocations();
+
+        $response->setCode(200);
+        $response->setData($locations);
+        $response->setMessage('success');
+
+        return $response->toJson();
 
     }//end getReports()
 

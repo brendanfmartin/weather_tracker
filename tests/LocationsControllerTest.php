@@ -3,7 +3,8 @@
 namespace UnitTests;
 
 use Controllers\LocationsController;
-use Mappers\LocationMapper;
+use Mappers\LocationJsonMapper;
+use Mappers\LocationDbMapper;
 use Models\Location;
 
 /**
@@ -29,7 +30,7 @@ class LocationsControllerTests extends \PHPUnit_Framework_TestCase
         $locations = self::parseFixture();
 
         foreach ($locations as $location) {
-            LocationMapper::persistLocation($location);
+            LocationDbMapper::persistLocation($location);
         }
 
     }//end setUpBeforeClass()
@@ -45,7 +46,7 @@ class LocationsControllerTests extends \PHPUnit_Framework_TestCase
         $locations = self::parseFixture();
 
         foreach ($locations as $location) {
-            LocationMapper::deleteLocation($location);
+            LocationDbMapper::deleteLocation($location);
         }
 
     }//end tearDownAfterClass()
@@ -62,7 +63,7 @@ class LocationsControllerTests extends \PHPUnit_Framework_TestCase
 
         $locations = array();
         foreach ($jsonObjects as $obj) {
-            array_push($locations, LocationMapper::mapGenericToLocation($obj));
+            array_push($locations, LocationJsonMapper::mapJsonObject($obj));
         }
 
         return $locations;

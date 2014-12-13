@@ -2,7 +2,7 @@
 
 namespace Controllers;
 
-use Mappers\LocationMapper;
+use Mappers\LocationDbMapper;
 
 /**
  * Location Controller.
@@ -38,7 +38,7 @@ class LocationsController
     public function getLocations()
     {
         $response  = new \Response();
-        $locations = LocationMapper::getAllLocations();
+        $locations = LocationDbMapper::getAllLocations();
 
         $response->setCode(200);
         $response->setData($locations);
@@ -59,7 +59,7 @@ class LocationsController
     public function getLocation($id)
     {
         $response = new \Response();
-        $location = LocationMapper::getLocation($id);
+        $location = LocationDbMapper::getLocation($id);
 
         if ($location !== false) {
             $response->setCode(200);

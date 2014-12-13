@@ -2,6 +2,8 @@
 
 namespace Controllers;
 
+use Mappers\WeatherReportDbMapper;
+
 /**
  * Forecast Reports Controller.
  *

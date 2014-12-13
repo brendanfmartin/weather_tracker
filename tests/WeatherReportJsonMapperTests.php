@@ -2,67 +2,29 @@
 
 namespace UnitTests;
 
-use Mappers\WeatherReportMapper;
+use Mappers\WeatherReportJsonMapper;
 
 /**
- * Test suite for WeatherReportMapper class.
+ * Test suite for WeatherReportJsonMapper class.
  *
  * @category Tests
  * @package  UnitTests
  * @author   John Landis <jalandis@gmail.com>
  * @license  http://opensource.org/licenses/gpl-license.php GNU Public License
- * @link     https://github.com/brendanfmartin/weather_tracker/blob/master/tests/WeatherReportMapperTests.php
+ * @link     https://github.com/brendanfmartin/weather_tracker/blob/master/tests/WeatherReportJsonMapperTests.php
  */
-class WeatherReportMapperTests extends \PHPUnit_Framework_TestCase
+class WeatherReportJsonMapperTests extends \PHPUnit_Framework_TestCase
 {
 
 
     /**
-     *  Before scenario setup.
-     *
-     * @return Void
-     */
-    public function setUp()
-    {
-        $report = WeatherReportMapper::mapCurrentJsonToPhp(file_get_contents(__DIR__.'/testData/testCurrentData.json'));
-        WeatherReportMapper::deleteCurrentReport($report);
-
-    }//end setUp()
-
-
-    /**
-     *  Before class setup.
-     *
-     * @return Void
-     */
-    public static function setUpBeforeClass()
-    {
-        error_reporting(E_ALL);
-
-    }//end setUpBeforeClass()
-
-
-    /**
-     *  After class tear down.
-     *
-     * @return Void
-     */
-    public static function tearDownAfterClass()
-    {
-        $report = WeatherReportMapper::mapCurrentJsonToPhp(file_get_contents(__DIR__.'/testData/testCurrentData.json'));
-        WeatherReportMapper::deleteCurrentReport($report);
-
-    }//end tearDownAfterClass()
-
-
-    /**
-     *  Test mapCurrentJsonToPhp method of WeatherReportMapper class.
+     *  Test mapCurrentJsonToPhp method of WeatherReportJsonMapper class.
      *
      * @return Void
      */
     public function testMapCurrentJsonToPhp()
     {
-        $report = WeatherReportMapper::mapCurrentJsonToPhp(file_get_contents(__DIR__.'/testData/testCurrentData.json'));
+        $report = WeatherReportJsonMapper::mapCurrentJsonToPhp(file_get_contents(__DIR__.'/testData/testCurrentData.json'));
 
         $this->assertEquals(false, $report->getIsForecast(), 'Found incorrect weather report type');
         $this->assertEquals(1417284900, $report->getDate(), 'Found incorrect Unix date');
@@ -92,13 +54,13 @@ class WeatherReportMapperTests extends \PHPUnit_Framework_TestCase
 
 
     /**
-     *  Test mapForecastJsonToPhp method of WeatherReportMapper class.
+     *  Test mapForecastJsonToPhp method of WeatherReportJsonMapper class.
      *
      * @return Void
      */
     public function testMapForecastJsonToPhp()
     {
-        $reports = WeatherReportMapper::mapForecastJsonToPhp(
+        $reports = WeatherReportJsonMapper::mapForecastJsonToPhp(
             file_get_contents(__DIR__.'/testData/test5DayForecastData.json')
         );
 
@@ -138,90 +100,6 @@ class WeatherReportMapperTests extends \PHPUnit_Framework_TestCase
         $this->assertEquals(0, $lastReport->getRainPrecipitationVolume(), 'Found incorrect rain precipitation');
 
     }//end testMapForecastJsonToPhp()
-
-
-    /**
-     *  Test getCurrentReport method of WeatherReportMapper class.
-     *
-     * @return Void
-     */
-    public function testGetCurrentReport()
-    {
-        $report = WeatherReportMapper::mapCurrentJsonToPhp(file_get_contents(__DIR__.'/testData/testCurrentData.json'));
-        WeatherReportMapper::persistCurrentReport($report);
-
-        $report = WeatherReportMapper::getCurrentReport(
-            $report->getLocation(),
-            $report->getDate(),
-            $report->getIsForecast()
-        );
-
-        $this->assertEquals(false, $report->getIsForecast(), 'Found incorrect weather report type');
-        $this->assertEquals(1417284900, $report->getDate(), 'Found incorrect Unix date');
-        $this->assertEquals(1417262608, $report->getSunrise(), 'Found incorrect Unix sunrise date');
-        $this->assertEquals(1417297102, $report->getSunset(), 'Found incorrect Unix sunset date');
-        $this->assertEquals(32.4, $report->getTemperature(), 'Found incorrect temperature');
-        $this->assertEquals(30.2, $report->getMinTemperature(), 'Found incorrect min temperature');
-        $this->assertEquals(35.6, $report->getMaxTemperature(), 'Found incorrect max temperature');
-        $this->assertEquals(84, $report->getHumidity(), 'Found incorrect humidity');
-        $this->assertEquals(1025, $report->getPressure(), 'Found incorrect pressure');
-        $this->assertEquals(1018.18, $report->getSeaLevelPressure(), 'Found incorrect seal level pressure');
-        $this->assertEquals(1005.93, $report->getGroundLevelPressure(), 'Found incorrect ground level pressure');
-        $this->assertEquals(5.62, $report->getWindSpeed(), 'Found incorrect wind speed');
-        $this->assertEquals(120, $report->getWindDirection(), 'Found incorrect wind direction');
-        $this->assertEquals(10, $report->getWindGusts(), 'Found incorrect wind gusts');
-        $this->assertEquals(75, $report->getCloudiness(), 'Found incorrect cloudiness');
-        $this->assertEquals(10, $report->getRainPrecipitationVolume(), 'Found incorrect rain precipitation');
-        $this->assertEquals(8, $report->getSnowPrecipitationVolume(), 'Found incorrect snow precipitation');
-
-        $location = $report->getLocation();
-        $this->assertEquals(4562144, $location->getId(), 'Found incorrect location id');
-        $this->assertEquals('West Chester', $location->getLocationName(), 'Found incorrect location name');
-        $this->assertEquals(-75.6, $location->getLongitude(), 'Found incorrect longitude');
-        $this->assertEquals(39.96, $location->getLatitude(), 'Found incorrect latitude');
-
-    }//end testGetCurrentReport()
-
-
-    /**
-     *  Test deleteCurrentReport method of WeatherReportMapper class.
-     *
-     * @return Void
-     */
-    public function testDeleteCurrentReport()
-    {
-        $report = WeatherReportMapper::mapCurrentJsonToPhp(file_get_contents(__DIR__.'/testData/testCurrentData.json'));
-
-        WeatherReportMapper::persistCurrentReport($report);
-        $this->assertTrue(WeatherReportMapper::deleteCurrentReport($report), 'Failed deleting a weather report');
-
-    }//end testDeleteCurrentReport()
-
-
-    /**
-     *  Test persistCurrentReport method of WeatherReportMapper class.
-     *
-     * @return Void
-     */
-    public function testpersistCurrentReport()
-    {
-        $report = WeatherReportMapper::mapCurrentJsonToPhp(file_get_contents(__DIR__.'/testData/testCurrentData.json'));
-
-        WeatherReportMapper::deleteCurrentReport($report);
-
-        // Save new.
-        $this->assertTrue(WeatherReportMapper::persistCurrentReport($report), 'Persisting new weather report failed');
-
-        // Minor change.
-        $report->setMinTemperature(1);
-
-        // Save existing.
-        $this->assertTrue(
-            WeatherReportMapper::persistCurrentReport($report),
-            'Persisting existing weather report failed'
-        );
-
-    }//end testpersistCurrentReport()
 
 
 }//end class

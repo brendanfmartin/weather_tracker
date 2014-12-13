@@ -6,15 +6,15 @@ use Models\Location;
 use Database\WeatherDB;
 
 /**
- * Location Mapper.
+ * Location DB Mapper.
  *
  * @category Library
  * @package  Mappers
  * @author   John Landis <jalandis@gmail.com>
  * @license  http://opensource.org/licenses/gpl-license.php GNU Public License
- * @link     https://github.com/brendanfmartin/weather_tracker/blob/master/library/Mappers/LocationMapper.php
+ * @link     https://github.com/brendanfmartin/weather_tracker/blob/master/library/Mappers/LocationDbMapper.php
  */
-class LocationMapper
+class LocationDbMapper
 {
 
 
@@ -25,57 +25,6 @@ class LocationMapper
     {
 
     }//end __construct()
-
-
-    /**
-     * Map current json data to PHP Location object.
-     *
-     * @param Object $object Generic json converted Php Object
-     *
-     * @return Location Parsed Location object
-     */
-    public static function mapGenericToLocation($object)
-    {
-        $location = new Location();
-        if (isset($object->id) === true) {
-            $location->setId($object->id);
-        }
-
-        if (isset($object->name) === true) {
-            $location->setLocationName($object->name);
-        }
-
-        if (isset($object->coord->lon) === true) {
-            $location->setLongitude($object->coord->lon);
-        }
-
-        if (isset($object->coord->lat) === true) {
-            $location->setLatitude($object->coord->lat);
-        }
-
-        return $location;
-
-    }//end mapGenericToLocation()
-
-
-    /**
-     * Private utility method for mapping Db result to PHP object.
-     *
-     * @param pg_query_params $result Return value for db query
-     *
-     * @return Location Parsed Location object
-     */
-    private static function _mapDbToPhp($result)
-    {
-        $location = new Location();
-        $location->setId($result['id']);
-        $location->setLocationName($result['name']);
-        $location->setLongitude($result['longitude']);
-        $location->setLatitude($result['latitude']);
-
-        return $location;
-
-    }//end _mapDbToPhp()
 
 
     /**
@@ -229,6 +178,26 @@ class LocationMapper
         return $result;
 
     }//end _insertLocation()
+
+
+    /**
+     * Private utility method for mapping Db result to PHP object.
+     *
+     * @param pg_query_params $result Return value for db query
+     *
+     * @return Location Parsed Location object
+     */
+    private static function _mapDbToPhp($result)
+    {
+        $location = new Location();
+        $location->setId($result['id']);
+        $location->setLocationName($result['name']);
+        $location->setLongitude($result['longitude']);
+        $location->setLatitude($result['latitude']);
+
+        return $location;
+
+    }//end _mapDbToPhp()
 
 
 }//end class
