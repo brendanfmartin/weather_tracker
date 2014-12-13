@@ -11,7 +11,9 @@ use Mappers\LocationMapper;
  * @package  Controllers
  * @author   John Landis <jalandis@gmail.com>
  * @license  http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @codingStandardsIgnoreStart
  * @link     https://github.com/brendanfmartin/weather_tracker/blob/master/webservice/Controllers/LocationsController.php
+ * @codingStandardsIgnoreEnd
  */
 class LocationsController
 {
@@ -29,15 +31,49 @@ class LocationsController
 
 
     /**
-     * Location collection action.
+     * Location get collection action.
      *
-     * @return Void
+     * @return String json encoded response
      */
     public function getLocations()
     {
-        return json_encode(LocationMapper::getAllLocations());
+        $response  = new \Response();
+        $locations = LocationMapper::getAllLocations();
+
+        $response->setCode(200);
+        $response->setData($locations);
+        $response->setMessage('success');
+
+        return $response->toJson();
 
     }//end getLocations()
+
+
+    /**
+     * Location get action.
+     *
+     * @param mixed $id Id for Location record
+     *
+     * @return String json encoded response
+     */
+    public function getLocation($id)
+    {
+        $response = new \Response();
+        $location = LocationMapper::getLocation($id);
+
+        if ($location !== false) {
+            $response->setCode(200);
+            $response->setData($location);
+            $response->setMessage('success');
+        } else {
+            $response->setCode(404);
+            $response->setData(null);
+            $response->setMessage("failed to find location record with id: {$id}.");
+        }
+
+        return $response->toJson();
+
+    }//end getLocation()
 
 
 }//end class

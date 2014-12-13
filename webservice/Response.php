@@ -12,25 +12,25 @@
 class Response
 {
 
-    private $code;
+    private $_code;
 
-    private $data;
+    private $_data;
 
-    private $message;
+    private $_message;
 
 
     /**
      * Constructor.
      *
-     * @param $code    Indicating status of request
-     * @param $message Description of response "Success" or "Error message"
-     * @param $data    Requested data
+     * @param mixed  $code    Indicating status of request
+     * @param string $message Description of response "Success" or "Error message"
+     * @param mixed  $data    Requested data
      */
-    public function __construct($code = '', $message = '', $data = '')
+    public function __construct($code='', $message='', $data='')
     {
-        $this->code    = $code;
-        $this->data    = $data;
-        $this->message = $message;
+        $this->_code    = $code;
+        $this->_data    = $data;
+        $this->_message = $message;
 
     }//end __construct()
 
@@ -42,7 +42,7 @@ class Response
      */
     public function getCode()
     {
-        return $this->code;
+        return $this->_code;
 
     }//end getCode()
 
@@ -56,7 +56,7 @@ class Response
      */
     public function setCode($code)
     {
-        $this->code = $code;
+        $this->_code = $code;
 
         return $this;
 
@@ -70,7 +70,7 @@ class Response
      */
     public function getData()
     {
-        return $this->data;
+        return $this->_data;
 
     }//end getData()
 
@@ -78,13 +78,13 @@ class Response
     /**
      * Sets the value of data.
      *
-     * @param String encoded data
+     * @param mixed $data Data requested.
      *
      * @return self
      */
     public function setData($data)
     {
-        $this->data = $data;
+        $this->_data = $data;
 
         return $this;
 
@@ -98,7 +98,7 @@ class Response
      */
     public function getMessage()
     {
-        return $this->message;
+        return $this->_message;
 
     }//end getMessage()
 
@@ -106,13 +106,13 @@ class Response
     /**
      * Sets the value of message.
      *
-     * @param String Response message
+     * @param string $message Response message
      *
      * @return self
      */
     public function setMessage($message)
     {
-        $this->message = $message;
+        $this->_message = $message;
 
         return $this;
 
@@ -128,7 +128,7 @@ class Response
     {
         return json_encode(get_object_vars($this));
 
-    }//end setMessage()
+    }//end toJson()
 
 
 }//end class

@@ -12,17 +12,17 @@
 class Request
 {
 
-    private $request;
+    private $_request;
 
 
     /**
      * Constructor.
      *
-     * $request Associative array
+     * @param Array $request Original unaltered request
      */
     public function __construct($request)
     {
-        $this->request = $request;
+        $this->_request = $request;
 
     }//end __construct()
 
@@ -42,7 +42,7 @@ class Request
     /**
      * Get request parameter.
      *
-     * @param $id Id for request parameter
+     * @param mixed $id Id for request parameter
      *
      * @return mixed Found paramater or false
      */
