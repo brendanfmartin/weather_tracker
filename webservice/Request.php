@@ -11,6 +11,48 @@
  */
 class Request
 {
+
+    private $request;
+
+
+    /**
+     * Constructor.
+     *
+     * $request Associative array
+     */
+    public function __construct($request)
+    {
+        $this->request = $request;
+
+    }//end __construct()
+
+
+    /**
+     * Is HTTP request using get method.
+     *
+     * @return Boolean
+     */
+    public function isGet()
+    {
+        return true;
+
+    }//end isGet()
+
+
+    /**
+     * Get request parameter.
+     *
+     * @param $id Id for request parameter
+     *
+     * @return mixed Found paramater or false
+     */
+    public function getParam($id)
+    {
+        return false;
+
+    }//end getParam()
+
+
 }//end class
 
 ?>
