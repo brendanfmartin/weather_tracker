@@ -1,6 +1,6 @@
 <?php
 
-namespace UnitTests;
+namespace UnitTests\Controllers;
 
 use Controllers\LocationsController;
 use Mappers\LocationJsonMapper;
@@ -11,7 +11,7 @@ use Models\Location;
  * Test suite for LocationsController class.
  *
  * @category Tests
- * @package  UnitTests
+ * @package  UnitTests\Controllers
  * @author   John Landis <jalandis@gmail.com>
  * @license  http://opensource.org/licenses/gpl-license.php GNU Public License
  * @link     https://github.com/brendanfmartin/weather_tracker/blob/master/tests/LocationsControllerTest.php
@@ -59,7 +59,7 @@ class LocationsControllerTest extends \PHPUnit_Framework_TestCase
      */
     public static function parseFixture()
     {
-        $jsonObjects = json_decode(file_get_contents(__DIR__.'/testData/locationsFixture.json'));
+        $jsonObjects = json_decode(file_get_contents(__DIR__.'/../testData/locationsFixture.json'));
 
         $locations = array();
         foreach ($jsonObjects as $obj) {
@@ -117,6 +117,28 @@ class LocationsControllerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(1.1, $location->getLatitude(), 'Found incorrect latitude');
 
     }//end testGetLocation()
+
+
+    /**
+     * Test getLocation method of LocationsController class with bad request.
+     *
+     * @return Void
+     */
+    public function testGetLocation404()
+    {
+        $stubRequest        = new \Request(array());
+        $locationController = new LocationsController($stubRequest);
+        $json               = $locationController->getLocation(-1);
+        $obj                = json_decode($json);
+
+        $this->assertEquals(404, $obj->_code, 'Found incorrect return code');
+        $this->assertEquals(
+            'Failed to find location record with id: -1.',
+            $obj->_message,
+            'Found incorrect message'
+        );
+
+    }//end testGetLocation404()
 
 
 }//end class

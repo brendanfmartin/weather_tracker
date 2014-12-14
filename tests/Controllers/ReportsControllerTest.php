@@ -1,6 +1,6 @@
 <?php
 
-namespace UnitTests;
+namespace UnitTests\Controllers;
 
 use Controllers\ReportsController;
 use Mappers\LocationJsonMapper;
@@ -13,7 +13,7 @@ use Models\WeatherReport;
  * Test suite for ReportsController class.
  *
  * @category Tests
- * @package  UnitTests
+ * @package  UnitTests\Controllers
  * @author   John Landis <jalandis@gmail.com>
  * @license  http://opensource.org/licenses/gpl-license.php GNU Public License
  * @link     https://github.com/brendanfmartin/weather_tracker/blob/master/tests/ReportsControllerTest.php
@@ -67,7 +67,7 @@ class ReportsControllerTest extends \PHPUnit_Framework_TestCase
      */
     public static function parseFixture()
     {
-        $jsonObjects = json_decode(file_get_contents(__DIR__.'/testData/reportsFixture.json'));
+        $jsonObjects = json_decode(file_get_contents(__DIR__.'/../testData/reportsFixture.json'));
 
         $reports = array();
         foreach ($jsonObjects as $obj) {
@@ -149,6 +149,28 @@ class ReportsControllerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(39.96, $location->getLatitude(), 'Found incorrect latitude');
 
     }//end testGetReport()
+
+
+    /**
+     * Test getReport method of ReportsController class with bad request.
+     *
+     * @return Void
+     */
+    public function testGetReport404()
+    {
+        $stubRequest      = new \Request(array());
+        $reportController = new ReportsController($stubRequest);
+        $json             = $reportController->getReport(-1);
+        $obj              = json_decode($json);
+
+        $this->assertEquals(404, $obj->_code, 'Found incorrect return code');
+        $this->assertEquals(
+            'Failed to find weather report record with id: -1.',
+            $obj->_message,
+            'Found incorrect message'
+        );
+
+    }//end testGetReport404()
 
 
 }//end class
