@@ -1,0 +1,252 @@
+[
+  {
+    "coord": {
+      "lon": -75.6,
+      "lat": 39.96
+    },
+    "sys": {
+      "type": 1,
+      "id": 2340,
+      "message": 0.1795,
+      "country": "United States of America",
+      "sunrise": 1417262608,
+      "sunset": 1417297102
+    },
+    "weather": [
+      {
+        "id": 803,
+        "main": "Clouds",
+        "description": "broken clouds",
+        "icon": "04d"
+      }
+    ],
+    "base": "cmc stations",
+    "main": {
+      "temp": 32.4,
+      "pressure": 1025,
+      "sea_level":1018.18,
+      "grnd_level":1005.93,
+      "temp_min": 30.2,
+      "temp_max": 35.6,
+      "humidity": 84
+    },
+    "wind": {
+      "speed": 5.62,
+      "deg": 120,
+      "gust": 10
+    },
+    "clouds": {
+      "all": 75
+    },
+    "rain": {
+      "3h": 10
+    },
+    "snow": {
+      "3h": 8
+    },
+    "dt": 1417284901,
+    "id": 1,
+    "name": "West Chester",
+    "cod": 200
+  },
+  {
+    "coord": {
+      "lon": -75.6,
+      "lat": 39.96
+    },
+    "sys": {
+      "type": 1,
+      "id": 2340,
+      "message": 0.1795,
+      "country": "United States of America",
+      "sunrise": 1417262608,
+      "sunset": 1417297102
+    },
+    "weather": [
+      {
+        "id": 803,
+        "main": "Clouds",
+        "description": "broken clouds",
+        "icon": "04d"
+      }
+    ],
+    "base": "cmc stations",
+    "main": {
+      "temp": 32.4,
+      "pressure": 1025,
+      "sea_level":1018.18,
+      "grnd_level":1005.93,
+      "temp_min": 30.2,
+      "temp_max": 35.6,
+      "humidity": 84
+    },
+    "wind": {
+      "speed": 5.62,
+      "deg": 120,
+      "gust": 10
+    },
+    "clouds": {
+      "all": 75
+    },
+    "rain": {
+      "3h": 10
+    },
+    "snow": {
+      "3h": 8
+    },
+    "dt": 1417284902,
+    "id": 2,
+    "name": "West Chester",
+    "cod": 200
+  },
+  {
+    "coord": {
+      "lon": -75.6,
+      "lat": 39.96
+    },
+    "sys": {
+      "type": 1,
+      "id": 2340,
+      "message": 0.1795,
+      "country": "United States of America",
+      "sunrise": 1417262608,
+      "sunset": 1417297102
+    },
+    "weather": [
+      {
+        "id": 803,
+        "main": "Clouds",
+        "description": "broken clouds",
+        "icon": "04d"
+      }
+    ],
+    "base": "cmc stations",
+    "main": {
+      "temp": 32.4,
+      "pressure": 1025,
+      "sea_level":1018.18,
+      "grnd_level":1005.93,
+      "temp_min": 30.2,
+      "temp_max": 35.6,
+      "humidity": 84
+    },
+    "wind": {
+      "speed": 5.62,
+      "deg": 120,
+      "gust": 10
+    },
+    "clouds": {
+      "all": 75
+    },
+    "rain": {
+      "3h": 10
+    },
+    "snow": {
+      "3h": 8
+    },
+    "dt": 1417284903,
+    "id": 3,
+    "name": "West Chester",
+    "cod": 200
+  },
+  {
+    "coord": {
+      "lon": -75.6,
+      "lat": 39.96
+    },
+    "sys": {
+      "type": 1,
+      "id": 2340,
+      "message": 0.1795,
+      "country": "United States of America",
+      "sunrise": 1417262608,
+      "sunset": 1417297102
+    },
+    "weather": [
+      {
+        "id": 803,
+        "main": "Clouds",
+        "description": "broken clouds",
+        "icon": "04d"
+      }
+    ],
+    "base": "cmc stations",
+    "main": {
+      "temp": 32.4,
+      "pressure": 1025,
+      "sea_level":1018.18,
+      "grnd_level":1005.93,
+      "temp_min": 30.2,
+      "temp_max": 35.6,
+      "humidity": 84
+    },
+    "wind": {
+      "speed": 5.62,
+      "deg": 120,
+      "gust": 10
+    },
+    "clouds": {
+      "all": 75
+    },
+    "rain": {
+      "3h": 10
+    },
+    "snow": {
+      "3h": 8
+    },
+    "dt": 1417284904,
+    "id": 4,
+    "name": "West Chester",
+    "cod": 200
+  },
+  {
+    "coord": {
+      "lon": -75.6,
+      "lat": 39.96
+    },
+    "sys": {
+      "type": 1,
+      "id": 2340,
+      "message": 0.1795,
+      "country": "United States of America",
+      "sunrise": 1417262608,
+      "sunset": 1417297102
+    },
+    "weather": [
+      {
+        "id": 803,
+        "main": "Clouds",
+        "description": "broken clouds",
+        "icon": "04d"
+      }
+    ],
+    "base": "cmc stations",
+    "main": {
+      "temp": 32.4,
+      "pressure": 1025,
+      "sea_level":1018.18,
+      "grnd_level":1005.93,
+      "temp_min": 30.2,
+      "temp_max": 35.6,
+      "humidity": 84
+    },
+    "wind": {
+      "speed": 5.62,
+      "deg": 120,
+      "gust": 10
+    },
+    "clouds": {
+      "all": 75
+    },
+    "rain": {
+      "3h": 10
+    },
+    "snow": {
+      "3h": 8
+    },
+    "dt": 1417284905,
+    "id": 5,
+    "name": "West Chester",
+    "cod": 200
+  }
+]
