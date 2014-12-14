@@ -2,14 +2,14 @@ Database Migration Scripts
 ===============
 
 ### Naming conventions
-1. script_title_setup_###.sql
-2. script_title_teardown_###.sql
+1. ###_script_title_setup.sql
+2. ###_script_title_teardown.sql
 
 ### Order of Execution
 
 ##### Special Cases
-1. setup_0.sql
-2. teardown_0.sql
+1. 0_setup.sql
+2. 0_teardown.sql
 
 These scripts are special and required to run under postgres user with no DB specified.
 
