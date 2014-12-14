@@ -35,7 +35,7 @@ class WeatherReportDbMapper
      *
      * @return Boolean Success indicator
      */
-    public static function deleteCurrentReport(WeatherReport $weatherReport)
+    public static function deleteReport(WeatherReport $weatherReport)
     {
         $db = WeatherDB::getInstance();
 
@@ -50,7 +50,7 @@ class WeatherReportDbMapper
 
         return $db->delete('weather_reports', $params);
 
-    }//end deleteCurrentReport()
+    }//end deleteReport()
 
 
     /**
@@ -60,21 +60,21 @@ class WeatherReportDbMapper
      *
      * @return Boolean Success indicator
      */
-    public static function persistCurrentReport(WeatherReport $weatherReport)
+    public static function persistReport(WeatherReport $weatherReport)
     {
         $result = LocationDbMapper::persistLocation($weatherReport->getLocation());
 
         if ($result === true) {
             if (empty($weatherReport->getId()) === true) {
-                $result = self::_insertWeatherReport($weatherReport);
+                $result = self::_insertReport($weatherReport);
             } else {
-                $result = self::_updateWeatherReport($weatherReport);
+                $result = self::_updateReport($weatherReport);
             }
         }
 
         return $result;
 
-    }//end persistCurrentReport()
+    }//end persistReport()
 
 
     /**
@@ -86,7 +86,7 @@ class WeatherReportDbMapper
      *
      * @return WeatherReport object or Boolean false indicating failure
      */
-    public static function getCurrentReport(Location $location, $date, $isForecast)
+    public static function getReport(Location $location, $date, $isForecast)
     {
         $selectQuery = file_get_contents(__DIR__.'/queries/selectWeatherReport.sql');
         $db          = WeatherDB::getInstance();
@@ -127,7 +127,91 @@ class WeatherReportDbMapper
 
         return $result;
 
-    }//end getCurrentReport()
+    }//end getReport()
+
+
+    /**
+     * Populates PHP WeatherReport object from database.
+     *
+     * @param mixed $id Report db id.
+     *
+     * @return WeatherReport object or Boolean false indicating failure
+     */
+    public static function getReportById($id)
+    {
+        $selectQuery = file_get_contents(__DIR__.'/queries/selectWeatherReport.sql');
+        $db          = WeatherDB::getInstance();
+
+        $params = array(
+                   'id'          => $id,
+                   'location_id' => null,
+                   'report_date' => null,
+                   'is_forecast' => null,
+                  );
+
+        $queryResults = $db->query($selectQuery, $params);
+
+        if ($queryResults !== false) {
+            $result = pg_affected_rows($queryResults) !== 0;
+
+            if ($result === true) {
+                $rowData = pg_fetch_assoc($queryResults, 0);
+                $result  = self::_mapDbToPhp($rowData);
+
+                $location = LocationDbMapper::getLocation($rowData['location_id']);
+
+                if ($location !== false) {
+                    $result->setLocation($location);
+                }
+            }
+        } else {
+            $result = false;
+        }
+
+        return $result;
+
+    }//end getReportById()
+
+
+    /**
+     * Populates all PHP WeatherReport objects from database.
+     *
+     * @param Boolean $isForecast Indicated forecast or actual data
+     *
+     * @return array WeatherReport objects
+     */
+    public static function getAllReports($isForecast)
+    {
+        $selectQuery = file_get_contents(__DIR__.'/queries/selectAllWeatherReports.sql');
+        $db          = WeatherDB::getInstance();
+
+        if ($isForecast === true) {
+            $isForecast = 'true';
+        } else {
+            $isForecast = 'false';
+        }
+
+        $params = array('is_forecast' => $isForecast);
+
+        $queryResults = $db->query($selectQuery, $params);
+
+        $reports = array();
+        if ($queryResults !== false) {
+            while ($reportRow = pg_fetch_assoc($queryResults)) {
+                $report   = self::_mapDbToPhp($reportRow);
+                $location = LocationDbMapper::getLocation($reportRow['location_id']);
+
+                if ($location !== false) {
+                    $report->setLocation($location);
+                }
+
+                array_push($reports, $report);
+            }
+        }
+
+        return $reports;
+
+    }//end getAllReports()
 
 
     /**
@@ -137,7 +221,7 @@ class WeatherReportDbMapper
      *
      * @return Boolean Success indicator
      */
-    private static function _updateWeatherReport(WeatherReport $weatherReport)
+    private static function _updateReport(WeatherReport $weatherReport)
     {
         $updateQuery = file_get_contents(__DIR__.'/queries/updateWeatherReport.sql');
 
@@ -177,7 +261,7 @@ class WeatherReportDbMapper
 
         return $result;
 
-    }//end _updateWeatherReport()
+    }//end _updateReport()
 
 
     /**
@@ -187,7 +271,7 @@ class WeatherReportDbMapper
      *
      * @return Boolean Success indicator
      */
-    private static function _insertWeatherReport(WeatherReport $weatherReport)
+    private static function _insertReport(WeatherReport $weatherReport)
     {
         $insertQuery = file_get_contents(__DIR__.'/queries/insertWeatherReport.sql');
 
@@ -224,7 +308,7 @@ class WeatherReportDbMapper
             $result = pg_affected_rows($queryResults) !== 0;
 
             if ($result === true) {
-                $insertedReport = self::getCurrentReport(
+                $insertedReport = self::getReport(
                     $weatherReport->getLocation(),
                     $weatherReport->getDate(),
                     $isForecast
@@ -237,7 +321,7 @@ class WeatherReportDbMapper
 
         return $result;
 
-    }//end _insertWeatherReport()
+    }//end _insertReport()
 
 
     /**

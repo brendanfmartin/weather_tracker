@@ -14,9 +14,9 @@ use Models\Location;
  * @package  UnitTests
  * @author   John Landis <jalandis@gmail.com>
  * @license  http://opensource.org/licenses/gpl-license.php GNU Public License
- * @link     https://github.com/brendanfmartin/weather_tracker/blob/master/tests/LocationsControllerTests.php
+ * @link     https://github.com/brendanfmartin/weather_tracker/blob/master/tests/LocationsControllerTest.php
  */
-class LocationsControllerTests extends \PHPUnit_Framework_TestCase
+class LocationsControllerTest extends \PHPUnit_Framework_TestCase
 {
 
 
@@ -116,7 +116,7 @@ class LocationsControllerTests extends \PHPUnit_Framework_TestCase
         $this->assertEquals(-1.1, $location->getLongitude(), 'Found incorrect longitude');
         $this->assertEquals(1.1, $location->getLatitude(), 'Found incorrect latitude');
 
-    }//end testGetLocations()
+    }//end testGetLocation()
 
 
 }//end class

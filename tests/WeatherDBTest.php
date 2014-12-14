@@ -11,9 +11,9 @@ use Database\WeatherDB;
  * @package  UnitTests
  * @author   John Landis <jalandis@gmail.com>
  * @license  http://opensource.org/licenses/gpl-license.php GNU Public License
- * @link     https://github.com/brendanfmartin/weather_tracker/blob/master/tests/WeatherDBTests.php
+ * @link     https://github.com/brendanfmartin/weather_tracker/blob/master/tests/WeatherDBTest.php
  */
-class WeatherDBTests extends \PHPUnit_Framework_TestCase
+class WeatherDBTest extends \PHPUnit_Framework_TestCase
 {
 
 
