@@ -37,8 +37,8 @@ class ForecastsController
      */
     public function getForecasts()
     {
-        $response = new \Response();
-        $forecasts  = WeatherReportDbMapper::getAllReports(true);
+        $response  = new \Response();
+        $forecasts = WeatherReportDbMapper::getAllReports(true);
 
         $response->setCode(200);
         $response->setData($forecasts);
@@ -59,7 +59,7 @@ class ForecastsController
     public function getForecast($id)
     {
         $response = new \Response();
-        $forecast   = WeatherReportDbMapper::getReportById($id);
+        $forecast = WeatherReportDbMapper::getReportById($id);
 
         if ($forecast !== false) {
             $response->setCode(200);
