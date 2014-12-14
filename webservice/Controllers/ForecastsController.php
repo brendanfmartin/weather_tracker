@@ -68,7 +68,7 @@ class ForecastsController
         } else {
             $response->setCode(404);
             $response->setData(null);
-            $response->setMessage("failed to find weather forecast record with id: {$id}.");
+            $response->setMessage("Failed to find weather forecast record with id: {$id}.");
         }
 
         return $response->toJson();

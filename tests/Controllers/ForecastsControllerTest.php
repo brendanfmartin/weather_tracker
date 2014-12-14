@@ -1,6 +1,6 @@
 <?php
 
-namespace UnitTests;
+namespace UnitTests\Controllers;
 
 use Controllers\ForecastsController;
 use Mappers\LocationJsonMapper;
@@ -13,7 +13,7 @@ use Models\WeatherReport;
  * Test suite for ForecastsController class.
  *
  * @category Tests
- * @package  UnitTests
+ * @package  UnitTests\Controllers
  * @author   John Landis <jalandis@gmail.com>
  * @license  http://opensource.org/licenses/gpl-license.php GNU Public License
  * @link     https://github.com/brendanfmartin/weather_tracker/blob/master/tests/ForecastsControllerTest.php
@@ -67,7 +67,7 @@ class ForecastsControllerTest extends \PHPUnit_Framework_TestCase
      */
     public static function parseFixture()
     {
-        $jsonObjects = json_decode(file_get_contents(__DIR__.'/testData/reportsFixture.json'));
+        $jsonObjects = json_decode(file_get_contents(__DIR__.'/../testData/reportsFixture.json'));
 
         $reports = array();
         foreach ($jsonObjects as $obj) {
@@ -90,10 +90,10 @@ class ForecastsControllerTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetForecasts()
     {
-        $stubRequest      = new \Request(array());
-        $reportController = new ForecastsController($stubRequest);
-        $json             = $reportController->getForecasts();
-        $obj              = json_decode($json);
+        $stubRequest        = new \Request(array());
+        $forecastController = new ForecastsController($stubRequest);
+        $json               = $forecastController->getForecasts();
+        $obj                = json_decode($json);
 
         $reports = array();
         foreach ($obj->_data as $index => $wetObj) {
@@ -117,11 +117,11 @@ class ForecastsControllerTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetForecast()
     {
-        $stubRequest      = new \Request(array());
-        $reportController = new ForecastsController($stubRequest);
-        $json             = $reportController->getForecast(self::$_forecastId);
-        $obj              = json_decode($json);
-        $report           = new WeatherReport($obj->_data);
+        $stubRequest        = new \Request(array());
+        $forecastController = new ForecastsController($stubRequest);
+        $json               = $forecastController->getForecast(self::$_forecastId);
+        $obj                = json_decode($json);
+        $report             = new WeatherReport($obj->_data);
 
         $this->assertEquals(self::$_forecastId, $report->getId(), 'Found incorrect report id');
         $this->assertEquals(false, $report->getIsForecast(), 'Found incorrect weather report type');
@@ -149,6 +149,28 @@ class ForecastsControllerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(39.96, $location->getLatitude(), 'Found incorrect latitude');
 
     }//end testGetForecast()
+
+
+    /**
+     * Test getForecast method of ForecastsController class with bad request.
+     *
+     * @return Void
+     */
+    public function testGetForecast404()
+    {
+        $stubRequest        = new \Request(array());
+        $forecastController = new ForecastsController($stubRequest);
+        $json               = $forecastController->getForecast(-1);
+        $obj                = json_decode($json);
+
+        $this->assertEquals(404, $obj->_code, 'Found incorrect return code');
+        $this->assertEquals(
+            'Failed to find weather forecast record with id: -1.',
+            $obj->_message,
+            'Found incorrect message'
+        );
+
+    }//end testGetForecast404()
 
 
 }//end class

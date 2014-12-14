@@ -68,7 +68,7 @@ class LocationsController
         } else {
             $response->setCode(404);
             $response->setData(null);
-            $response->setMessage("failed to find location record with id: {$id}.");
+            $response->setMessage("Failed to find location record with id: {$id}.");
         }
 
         return $response->toJson();
