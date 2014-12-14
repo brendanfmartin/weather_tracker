@@ -11,9 +11,9 @@ use OpenWeather\NetworkRequest;
  * @package  UnitTests
  * @author   John Landis <jalandis@gmail.com>
  * @license  http://opensource.org/licenses/gpl-license.php GNU Public License
- * @link     https://github.com/brendanfmartin/weather_tracker/blob/master/tests/NetworkRequestTests.php
+ * @link     https://github.com/brendanfmartin/weather_tracker/blob/master/tests/NetworkRequestTest.php
  */
-class NetworkRequestTests extends \PHPUnit_Framework_TestCase
+class NetworkRequestTest extends \PHPUnit_Framework_TestCase
 {
 
 

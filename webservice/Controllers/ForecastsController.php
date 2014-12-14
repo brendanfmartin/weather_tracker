@@ -24,7 +24,7 @@ class ForecastsController
      *
      * @param Request $request Object holds all information about original http request.
      */
-    public function __construct(Request $request)
+    public function __construct(\Request $request)
     {
 
     }//end __construct()

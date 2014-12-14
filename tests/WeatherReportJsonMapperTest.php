@@ -11,9 +11,9 @@ use Mappers\WeatherReportJsonMapper;
  * @package  UnitTests
  * @author   John Landis <jalandis@gmail.com>
  * @license  http://opensource.org/licenses/gpl-license.php GNU Public License
- * @link     https://github.com/brendanfmartin/weather_tracker/blob/master/tests/WeatherReportJsonMapperTests.php
+ * @link     https://github.com/brendanfmartin/weather_tracker/blob/master/tests/WeatherReportJsonMapperTest.php
  */
-class WeatherReportJsonMapperTests extends \PHPUnit_Framework_TestCase
+class WeatherReportJsonMapperTest extends \PHPUnit_Framework_TestCase
 {
 
 
@@ -24,7 +24,9 @@ class WeatherReportJsonMapperTests extends \PHPUnit_Framework_TestCase
      */
     public function testMapCurrentJsonToPhp()
     {
-        $report = WeatherReportJsonMapper::mapCurrentJsonToPhp(file_get_contents(__DIR__.'/testData/testCurrentData.json'));
+        $report = WeatherReportJsonMapper::mapCurrentJsonToPhp(
+            file_get_contents(__DIR__.'/testData/testCurrentData.json')
+        );
 
         $this->assertEquals(false, $report->getIsForecast(), 'Found incorrect weather report type');
         $this->assertEquals(1417284900, $report->getDate(), 'Found incorrect Unix date');

@@ -11,9 +11,9 @@ use OpenWeather\CurrentWeatherApi;
  * @package  UnitTests
  * @author   John Landis <jalandis@gmail.com>
  * @license  http://opensource.org/licenses/gpl-license.php GNU Public License
- * @link     https://github.com/brendanfmartin/weather_tracker/blob/master/tests/CurrentWeatherApiTests.php
+ * @link     https://github.com/brendanfmartin/weather_tracker/blob/master/tests/CurrentWeatherApiTest.php
  */
-class CurrentWeatherApiTests extends \PHPUnit_Framework_TestCase
+class CurrentWeatherApiTest extends \PHPUnit_Framework_TestCase
 {
 
 

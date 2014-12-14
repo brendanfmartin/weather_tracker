@@ -12,9 +12,9 @@ use Mappers\WeatherReportDbMapper;
  * @package  UnitTests
  * @author   John Landis <jalandis@gmail.com>
  * @license  http://opensource.org/licenses/gpl-license.php GNU Public License
- * @link     https://github.com/brendanfmartin/weather_tracker/blob/master/tests/WeatherReportDbMapperTests.php
+ * @link     https://github.com/brendanfmartin/weather_tracker/blob/master/tests/WeatherReportDbMapperTest.php
  */
-class WeatherReportDbMapperTests extends \PHPUnit_Framework_TestCase
+class WeatherReportDbMapperTest extends \PHPUnit_Framework_TestCase
 {
 
 
@@ -25,8 +25,10 @@ class WeatherReportDbMapperTests extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $report = WeatherReportJsonMapper::mapCurrentJsonToPhp(file_get_contents(__DIR__.'/testData/testCurrentData.json'));
-        WeatherReportDbMapper::deleteCurrentReport($report);
+        $report = WeatherReportJsonMapper::mapCurrentJsonToPhp(
+            file_get_contents(__DIR__.'/testData/testCurrentData.json')
+        );
+        WeatherReportDbMapper::deleteReport($report);
 
     }//end setUp()
 
@@ -38,23 +40,27 @@ class WeatherReportDbMapperTests extends \PHPUnit_Framework_TestCase
      */
     public static function tearDownAfterClass()
     {
-        $report = WeatherReportJsonMapper::mapCurrentJsonToPhp(file_get_contents(__DIR__.'/testData/testCurrentData.json'));
-        WeatherReportDbMapper::deleteCurrentReport($report);
+        $report = WeatherReportJsonMapper::mapCurrentJsonToPhp(
+            file_get_contents(__DIR__.'/testData/testCurrentData.json')
+        );
+        WeatherReportDbMapper::deleteReport($report);
 
     }//end tearDownAfterClass()
 
 
     /**
-     *  Test getCurrentReport method of WeatherReportDbMapper class.
+     *  Test getReport method of WeatherReportDbMapper class.
      *
      * @return Void
      */
     public function testGetCurrentReport()
     {
-        $report = WeatherReportJsonMapper::mapCurrentJsonToPhp(file_get_contents(__DIR__.'/testData/testCurrentData.json'));
-        WeatherReportDbMapper::persistCurrentReport($report);
+        $report = WeatherReportJsonMapper::mapCurrentJsonToPhp(
+            file_get_contents(__DIR__.'/testData/testCurrentData.json')
+        );
+        WeatherReportDbMapper::persistReport($report);
 
-        $report = WeatherReportDbMapper::getCurrentReport(
+        $report = WeatherReportDbMapper::getReport(
             $report->getLocation(),
             $report->getDate(),
             $report->getIsForecast()
@@ -88,40 +94,44 @@ class WeatherReportDbMapperTests extends \PHPUnit_Framework_TestCase
 
 
     /**
-     *  Test deleteCurrentReport method of WeatherReportDbMapper class.
+     *  Test deleteReport method of WeatherReportDbMapper class.
      *
      * @return Void
      */
     public function testDeleteCurrentReport()
     {
-        $report = WeatherReportJsonMapper::mapCurrentJsonToPhp(file_get_contents(__DIR__.'/testData/testCurrentData.json'));
+        $report = WeatherReportJsonMapper::mapCurrentJsonToPhp(
+            file_get_contents(__DIR__.'/testData/testCurrentData.json')
+        );
 
-        WeatherReportDbMapper::persistCurrentReport($report);
-        $this->assertTrue(WeatherReportDbMapper::deleteCurrentReport($report), 'Failed deleting a weather report');
+        WeatherReportDbMapper::persistReport($report);
+        $this->assertTrue(WeatherReportDbMapper::deleteReport($report), 'Failed deleting a weather report');
 
     }//end testDeleteCurrentReport()
 
 
     /**
-     *  Test persistCurrentReport method of WeatherReportDbMapper class.
+     *  Test persistReport method of WeatherReportDbMapper class.
      *
      * @return Void
      */
     public function testPersistCurrentReport()
     {
-        $report = WeatherReportJsonMapper::mapCurrentJsonToPhp(file_get_contents(__DIR__.'/testData/testCurrentData.json'));
+        $report = WeatherReportJsonMapper::mapCurrentJsonToPhp(
+            file_get_contents(__DIR__.'/testData/testCurrentData.json')
+        );
 
-        WeatherReportDbMapper::deleteCurrentReport($report);
+        WeatherReportDbMapper::deleteReport($report);
 
         // Save new.
-        $this->assertTrue(WeatherReportDbMapper::persistCurrentReport($report), 'Persisting new weather report failed');
+        $this->assertTrue(WeatherReportDbMapper::persistReport($report), 'Persisting new weather report failed');
 
         // Minor change.
         $report->setMinTemperature(1);
 
         // Save existing.
         $this->assertTrue(
-            WeatherReportDbMapper::persistCurrentReport($report),
+            WeatherReportDbMapper::persistReport($report),
             'Persisting existing weather report failed'
         );
 

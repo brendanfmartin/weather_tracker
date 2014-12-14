@@ -22,7 +22,7 @@ class ReportsController
      *
      * @param Request $request Object holds all information about original http request.
      */
-    public function __construct(Request $request)
+    public function __construct(\Request $request)
     {
 
     }//end __construct()
@@ -35,16 +35,43 @@ class ReportsController
      */
     public function getReports()
     {
-        $response  = new \Response();
-        $locations = WeatherReportDbMapper::getAllLocations();
+        $response = new \Response();
+        $reports  = WeatherReportDbMapper::getAllReports(false);
 
         $response->setCode(200);
-        $response->setData($locations);
+        $response->setData($reports);
         $response->setMessage('success');
 
         return $response->toJson();
 
     }//end getReports()
+
+
+    /**
+     * Report get action.
+     *
+     * @param mixed $id Id for Weather Report record
+     *
+     * @return String json encoded response
+     */
+    public function getReport($id)
+    {
+        $response = new \Response();
+        $report   = WeatherReportDbMapper::getReportById($id);
+
+        if ($report !== false) {
+            $response->setCode(200);
+            $response->setData($report);
+            $response->setMessage('success');
+        } else {
+            $response->setCode(404);
+            $response->setData(null);
+            $response->setMessage("failed to find weather report record with id: {$id}.");
+        }
+
+        return $response->toJson();
+
+    }//end getReport()
 
 
 }//end class

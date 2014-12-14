@@ -116,6 +116,11 @@ class WeatherReport extends BaseModel
     {
         parent::__construct($parameters);
 
+        if (is_object($parameters) === true && $parameters->location !== null) {
+            $location = new Location($parameters->location);
+            $this->setLocation($location);
+        }
+
     }//end __construct()
 
 

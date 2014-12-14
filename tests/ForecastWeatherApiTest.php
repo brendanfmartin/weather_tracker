@@ -11,9 +11,9 @@ use OpenWeather\ForecastWeatherApi;
  * @package  UnitTests
  * @author   John Landis <jalandis@gmail.com>
  * @license  http://opensource.org/licenses/gpl-license.php GNU Public License
- * @link     https://github.com/brendanfmartin/weather_tracker/blob/master/tests/ForecastApiTests.php
+ * @link     https://github.com/brendanfmartin/weather_tracker/blob/master/tests/ForecastApiTest.php
  */
-class ForecastApiTests extends \PHPUnit_Framework_TestCase
+class ForecastApiTest extends \PHPUnit_Framework_TestCase
 {
 
 
