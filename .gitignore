@@ -1,3 +1,4 @@
 config/composer.phar
 config/composer.lock
 vendor/*
+frontend/javascript/lib
