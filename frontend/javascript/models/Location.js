@@ -1,5 +1,5 @@
 /*jslint indent: 2 */
-WT = WT || {};
+var WT = WT || {};
 WT.models = WT.models || {};
 
 /**
