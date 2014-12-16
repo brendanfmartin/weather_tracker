@@ -22,21 +22,23 @@ Setup
 
 ### Production Setup
 ```
-sudo apt-get install postgresql postgresql-contrib php5-pgsql
-.database/migrate.sh -u weather_tracker_user -p weather_tracker
-cd config
-php -r "readfile('https://getcomposer.org/installer');" | php
-php composer.phar install --no-dev
 ```
 
 ### Dev Setup
 ```
-sudo apt-get install postgresql postgresql-contrib php5-pgsql
-psql -U postgres -f database/setup_0.sql
-.database/migrate.sh -u weather_tracker_user -p weather_tracker
+# Javascript Dependency Management
+sudo apt-get install nodejs
+sudo apt-get install npm
+sudo npm install -g bower
+
+# PHP Dependency Management
 cd config
 php -r "readfile('https://getcomposer.org/installer');" | php
 php composer.phar install
+
+sudo apt-get install postgresql postgresql-contrib php5-pgsql
+psql -U postgres -f database/setup_0.sql
+.database/migrate.sh -u weather_tracker_user -p weather_tracker
 ```
 
 Coding Standards

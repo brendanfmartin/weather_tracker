@@ -1,3 +1,4 @@
+/*jslint indent: 2 */
 WT = WT || {};
 WT.models = WT.models || {};
 
@@ -5,46 +6,46 @@ WT.models = WT.models || {};
  * Location Model.
  */
 WT.models.Location = function () {
-  "use strict";
+  'use strict';
 
-  var _locationName = null,
-    _locationDescription = null,
-    _longitude = null,
-    _latitude = null;
+  var id = null,
+    locationName = null,
+    longitude = null,
+    latitude = null;
 
-  this.getlocationName = function () {
-    return _locationName;
+  this.getId = function () {
+    return this.id;
   };
 
-  this.setlocationName = function (locationName) {
-    _locationName = locationName;
+  this.setId = function (id) {
+    this.id = id;
     return this;
   };
 
-  this.getlocationDescription = function () {
-    return _locationDescription;
+  this.getlocationName = function () {
+    return this.locationName;
   };
 
-  this.setlocationDescription = function (locationDescription) {
-    _locationDescription = locationDescription;
+  this.setlocationName = function (locationName) {
+    this.locationName = locationName;
     return this;
   };
 
   this.getlongitude = function () {
-    return _longitude;
+    return this.longitude;
   };
 
   this.setlongitude = function (longitude) {
-    _longitude = longitude;
+    this.longitude = longitude;
     return this;
   };
 
   this.getlatitude = function () {
-    return _latitude;
+    return this.latitude;
   };
 
   this.setlatitude = function (latitude) {
-    _latitude = latitude;
+    this.latitude = latitude;
     return this;
   };
 };
