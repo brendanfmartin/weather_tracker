@@ -30,6 +30,8 @@ Setup
 sudo apt-get install nodejs
 sudo apt-get install npm
 sudo npm install -g bower
+cd config
+bower install
 
 # PHP Dependency Management
 cd config

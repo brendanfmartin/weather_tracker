@@ -14,7 +14,11 @@
   },
   "scripts": {
     "post-install-cmd": [
-      "bash gitHooks/setup.sh"
+      "bash gitHooks/setup.sh",
+      "bower install"
+    ],
+    "post-update-cmd": [
+        "bower install"
     ]
   }
 }
