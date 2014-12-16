@@ -30,8 +30,7 @@ Setup
 sudo apt-get install nodejs
 sudo apt-get install npm
 sudo npm install -g bower
-cd config
-bower install
+sudo npm install -g jshint
 
 # PHP Dependency Management
 cd config
