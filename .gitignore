@@ -1,4 +1,5 @@
 config/composer/composer.phar
 config/composer/composer.lock
+config/vagrant/.vagrant/*
 vendor/*
 frontend/javascript/lib
