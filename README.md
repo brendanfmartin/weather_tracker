@@ -38,9 +38,24 @@ php -r "readfile('https://getcomposer.org/installer');" | php
 php composer.phar install
 
 sudo apt-get install postgresql postgresql-contrib php5-pgsql
-psql -U postgres -f database/setup_0.sql
 .database/migrate.sh -u weather_tracker_user -p weather_tracker
 ```
+
+Vagrant
+================
+After initial setup, simply use ```vagrant up``` to start server.
+
+To remote in, use ```vagrant ssh```
+
+### Initial Setup
+```
+cd config\vagrant
+sudo ./bootstrap.sh
+```
+
+### Known Ubuntu Issue
+*default: stdin: is not a tty*
+[Ubuntu Bug](https://github.com/mitchellh/vagrant/issues/1673)
 
 Coding Standards
 ================

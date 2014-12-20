@@ -16,9 +16,12 @@ fi
 
 if [[ ! -e ".vagrant" ]]; then
   echo 'Updating and installing necessary packages'
-  apt-get update
-  apt-get install virtualbox
-  apt-get install vagrant
+  apt-get -y update
+  apt-get -y install virtualbox
+  apt-get -y install vagrant
+
+  vagrant plugin install vagrant-vbguest
+  vagrant plugin install vagrant-hostmanager
 
   boxes=$(sudo -u "${SUDO_USER}" VBoxManage list vms)
   boxExists=$(echo "${boxes}" | awk -v title="${VAGRANT_BOX_NAME}" '{gsub("\"","", $1); if($1==title) {print $1;}}')
