@@ -33,7 +33,7 @@ sudo npm install -g bower
 sudo npm install -g jshint
 
 # PHP Dependency Management
-cd config
+cd config/composer
 php -r "readfile('https://getcomposer.org/installer');" | php
 php composer.phar install
 
@@ -47,11 +47,13 @@ Coding Standards
 ### PHP Lint
 Currently will ignore any file in a folder named tests (case insensitive).
 ```
-vendor/bin/phpcs --standard=config/ruleset.xml path/to/file/___.php
+vendor/bin/phpcs --standard=config/lint/ruleset.xml path/to/file/___.php
 ```
 
 ### JavaScript
-Currently using external JSLint site.
+```
+jshint --config config/lint/.jshintrc frontend/javascript/src/
+```
 
 Testing
 ================
@@ -64,3 +66,4 @@ vendor/bin/phpunit --bootstrap autoload.php tests/
 ```
 
 ### JavaScript
+Open tests/javascript/SpecRunner.html in a browser.
