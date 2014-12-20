@@ -22,4 +22,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.synced_folder "../../database/", "/home/vagrant/database"
 
   config.vm.provision "shell", path: "provision.sh"
+
+  config.vm.network "private_network", ip: "192.168.67.87"
 end
