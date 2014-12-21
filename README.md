@@ -33,25 +33,42 @@ sudo npm install -g bower
 sudo npm install -g jshint
 
 # PHP Dependency Management
-cd config
+cd config/composer
 php -r "readfile('https://getcomposer.org/installer');" | php
 php composer.phar install
 
 sudo apt-get install postgresql postgresql-contrib php5-pgsql
-psql -U postgres -f database/setup_0.sql
 .database/migrate.sh -u weather_tracker_user -p weather_tracker
 ```
+
+Vagrant
+================
+After initial setup, simply use ```vagrant up``` to start server.
+
+To remote in, use ```vagrant ssh```
+
+### Initial Setup
+```
+cd config\vagrant
+sudo ./bootstrap.sh
+```
+
+### Known Ubuntu Issue
+*default: stdin: is not a tty*
+[Ubuntu Bug](https://github.com/mitchellh/vagrant/issues/1673)
 
 Coding Standards
 ================
 ### PHP Lint
 Currently will ignore any file in a folder named tests (case insensitive).
 ```
-vendor/bin/phpcs --standard=config/ruleset.xml path/to/file/___.php
+vendor/bin/phpcs --standard=config/lint/ruleset.xml path/to/file/___.php
 ```
 
 ### JavaScript
-Currently using external JSLint site.
+```
+jshint --config config/lint/.jshintrc frontend/javascript/src/
+```
 
 Testing
 ================
@@ -64,3 +81,4 @@ vendor/bin/phpunit --bootstrap autoload.php tests/
 ```
 
 ### JavaScript
+Open tests/javascript/SpecRunner.html in a browser.

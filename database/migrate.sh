@@ -1,5 +1,8 @@
 #!/bin/sh
 
+OLD_DIR=$(pwd)
+cd "$(dirname "$0")"
+
 # Reset getopts index
 OPTIND=1
 
@@ -28,7 +31,7 @@ echo "Running all migration scripts."
 for FILE in $ALL_SETUP_SCRIPTS
 do
 
-  echo " - $FILE"
+  echo " * $FILE"
   if [ $FILE = "0_setup.sql" ]
   then
     psql -U postgres -f $FILE
@@ -36,3 +39,5 @@ do
     psql -U $USERNAME $PASSWORD -f $FILE
   fi
 done
+
+cd "${OLD_DIR}"

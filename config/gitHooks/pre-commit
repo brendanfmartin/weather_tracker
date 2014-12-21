@@ -4,19 +4,8 @@ PROJECT=$(php -r "echo dirname(dirname(dirname(realpath('$0'))));")
 STAGED_PHP_FILES_CMD=$(git diff --cached --name-only --diff-filter=ACMR HEAD | grep '.php')
 STAGED_JS_FILES_CMD=$(git diff --cached --name-only --diff-filter=ACMR HEAD | grep '.js')
 
-# Determine if a file list is passed
-if [ "$#" -eq 1 ]
-then
-  oIFS=$IFS
-  IFS='
-  '
-  SFILES="$1"
-  IFS=$oIFS
-fi
-SFILES=${SFILES:-$STAGED_PHP_FILES_CMD}
-
 echo "Checking PHP Lint..."
-for FILE in $SFILES
+for FILE in $STAGED_PHP_FILES_CMD
 do
   php -l -d display_errors=0 "$PROJECT"/"$FILE"
   if [ $? != 0 ]
@@ -30,7 +19,7 @@ done
 if [ "$FILES" != "" ]
 then
   echo "Running PHP Code Sniffer..."
-  vendor/bin/phpcs --standard=config/ruleset.xml --encoding=utf-8 -n -p $FILES
+  vendor/bin/phpcs --standard=config/lint/ruleset.xml --encoding=utf-8 -n -p $FILES
   if [ $? != 0 ]
   then
     echo "Fix the error before commit."
@@ -46,13 +35,11 @@ then
   fi
 fi
 
-SFILES=${SFILES:-$STAGED_JS_FILES_CMD}
-
 echo "Checking JS Lint..."
-for FILE in $SFILES
+for FILE in $STAGED_JS_FILES_CMD
 do
   echo $FILE
-  jshint --config config/.jshintrc "$PROJECT"/"$FILE"
+  jshint --config config/lint/.jshintrc "$PROJECT"/"$FILE"
   if [ $? != 0 ]
   then
     echo "Fix the error before commit."

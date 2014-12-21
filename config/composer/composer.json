@@ -2,8 +2,8 @@
   "name": "brendanfmartin/weather_tracker",
   "description": "Track the accuracy of weather forecasts",
   "config": {
-    "bin-dir"   : "../vendor/bin",
-    "vendor-dir": "../vendor"
+    "bin-dir"   : "../../vendor/bin",
+    "vendor-dir": "../../vendor"
   },
   "require": {
     "symfony/yaml": "2.*"
@@ -14,11 +14,9 @@
   },
   "scripts": {
     "post-install-cmd": [
-      "bash gitHooks/setup.sh",
-      "bower install"
-    ],
-    "post-update-cmd": [
-        "bower install"
+      "pwd",
+      "bash ../gitHooks/setup.sh",
+      "cd ../bower && bower install"
     ]
   }
 }

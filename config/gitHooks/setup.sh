@@ -1,4 +1,4 @@
 #!/bin/sh
 
-cp gitHooks/pre-commit ../.git/hooks/pre-commit
-chmod +x ../.git/hooks/pre-commit
+cp ../gitHooks/pre-commit ../../.git/hooks/pre-commit
+chmod +x ../../.git/hooks/pre-commit
