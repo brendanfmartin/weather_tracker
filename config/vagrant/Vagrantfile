@@ -10,7 +10,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box_url = "http://cloud-images.ubuntu.com/vagrant/trusty/20141212/trusty-server-cloudimg-i386-vagrant-disk1.box"
 
   # Underscore not permitted in hostname
-  config.vm.hostname = "weather-tracker"
+  config.vm.hostname = "weather-tracker.com"
 
   config.hostmanager.enabled = true
   config.hostmanager.manage_host = true
@@ -20,6 +20,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   config.vm.synced_folder "../../database/", "/home/vagrant/database"
+
+  config.vm.synced_folder "../../config/apache/", "/etc/apache2/sites-available"
+  config.vm.synced_folder "../../", "/var/www/weather-tracker.com"
 
   config.vm.provision "shell", path: "provision.sh"
 
