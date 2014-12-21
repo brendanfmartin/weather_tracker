@@ -3,6 +3,7 @@
 # Bootstrap vagrant environment.
 #  - Update packages
 #  - Install virtualbox and vagrant
+#  - Install vagrant plugins
 #  - Import base box
 #  - Start vagrant machine
 
@@ -23,6 +24,7 @@ if [[ ! -e ".vagrant" ]]; then
   vagrant plugin install vagrant-vbguest
   vagrant plugin install vagrant-hostmanager
 
+  # TODO: This may be taken care of in the VagrantBox config.  (Remove and test.)
   boxes=$(sudo -u "${SUDO_USER}" VBoxManage list vms)
   boxExists=$(echo "${boxes}" | awk -v title="${VAGRANT_BOX_NAME}" '{gsub("\"","", $1); if($1==title) {print $1;}}')
 

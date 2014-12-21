@@ -18,6 +18,6 @@ a2enmod php5
 
 echo "ServerName weather-tracker.com" | tee /etc/apache2/conf-available/fqdn.conf
 a2enconf fqdn
-a2dissite weather-tracker.com
+a2ensite weather-tracker.com
 
 service apache2 restart
